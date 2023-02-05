@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .transition-100 {
+    transition: var(--transition-100);
+  }
+  .transition-200 {
+    transition: var(--transition-200);
+  }
+
+  .group-hover-scale {
+    @apply group-hover:scale-[1.02];
+    transition: transform 200ms linear;
+  }
+  .hover-scale {
+    @apply hover:scale-[1.02];
+    transition: transform 200ms linear;
+  }
+
+  .article-tag {
+    @apply block text-center absolute -top-[3px] left-2 rounded-[4px]  px-[3px] pt-[2px] pb-1 -z-10 group-hover:-top-7;
+    background-image: var(--theme-gradient);
+    transition: var(--transition-200);
+  }
+  .article-tag-content {
+    @apply flex items-center gap-1 pl-2 pr-3 text-white rounded-[4px] bg-[rgba(33,33,33,0.5)];
+  }
+
+  .logo-text {
+    @apply text-white text-[30px] font-semibold;
+    text-shadow: var(--text-shadow);
+  }
+
+  .card {
+    @apply overflow-hidden rounded-xl;
+    background-color: var(--background-secondary);
+    color: var(--text-normal);
+    box-shadow: var(--card-shadow);
+  }
+
+  .theme-gradient {
+    background-image: var(--theme-gradient);
+  }
+  .text-fill-transparent {
+    background-image: var(--theme-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bg-primary {
+    background-color: var(--background-primary);
+  }
+  .bg-secondary {
+    background-color: var(--background-secondary);
+  }
+  .text-normal {
+    color: var(--text-normal);
+  }
+  .transition- .shadow-primary {
+    box-shadow: var(--card-shadow);
+  }
+
+  .category-item {
+    @apply rounded-md overflow-hidden cursor-pointer hover:opacity-50;
+    background-color: var(--background-primary);
+    transition: var(--transition-200);
+  }
+
+  .profile-card {
+    @apply w-full h-98 px-1 pt-12 pb-1 rounded-xl hover:shadow-primary;
+    background-image: var(--theme-gradient);
+    transition: var(--transition-200);
+  }
+
+  .profile-link {
+    @apply w-12 h-12 mb-5 flex justify-center items-center cursor-pointer hover:opacity-50;
+    clip-path: polygon(50% 3%, 91% 25%, 91% 75%, 50% 97%, 9% 75%, 9% 25%);
+    background-color: var(--background-trans);
+    transition: var(--transition-200);
+  }
+}

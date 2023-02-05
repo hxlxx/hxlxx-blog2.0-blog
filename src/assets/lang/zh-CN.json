@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "首页",
+    "talks": "说说",
+    "about": "关于",
+    "archives": "归档",
+    "tags": "标签",
+    "message": "留言",
+    "album": "相册",
+    "friends": "友链",
+    "language": "中文",
+    "login": "登录"
+  },
+  "articleTag": {
+    "pinned": "置顶",
+    "feature": "推荐"
+  },
+  "all": "全部",
+  "featureArticles": "推荐文章",
+  "profile": {
+    "articles": "文章",
+    "talks": "说说",
+    "categories": "分类",
+    "tags": "标签" 
+  },
+  "title": {
+    "articles": "文章列表",
+    "recentComments": "最近评论",
+    "tags": "标签",
+    "notice": "公告",
+    "websiteInfo": "网站信息"
+  }
+}

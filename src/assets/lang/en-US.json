@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "HOME",
+    "talks": "TALKS",
+    "about": "ABOUT",
+    "archives": "ARCHIVES",
+    "tags": "TAGS",
+    "message": "MESSAGE",
+    "album": "ALBUM",
+    "friends": "FRIENDS",
+    "language": "EN",
+    "login": "LOGIN"
+  },
+  "articleTag": {
+    "pinned": "PINNED",
+    "feature": "FEATURE"
+  },
+  "all": "ALL",
+  "featureArticles": "FEATURE ARTICLES",
+  "profile": {
+    "articles": "Articles",
+    "talks": "Talks",
+    "categories": "Categories",
+    "tags": "Tags" 
+  },
+  "title": {
+    "articles": "ARTICLES",
+    "recentComments": "RECENT COMMENTS",
+    "tags": "TAGS",
+    "notice": "NOTICE",
+    "websiteInfo": "WEBSITE INFO"
+  }
+}
