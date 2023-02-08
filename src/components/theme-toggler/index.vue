@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 
+const darkValue = ref<boolean>(false)
 const isDark = useDark({
-  selector: 'html',
-  attribute: 'theme',
-  valueDark: 'dark',
-  valueLight: 'light'
+  onChanged(dark: boolean) {
+    const html = document.documentElement
+    const theme = dark ? 'dark' : 'light'
+    darkValue.value = dark
+    html.setAttribute('theme', theme)
+    localStorage.setItem('theme', theme)
+  }
 })
 const toggleDark = useToggle(isDark)
 </script>
 
 <template>
   <div class="toggleWrapper">
-    <input type="checkbox" class="dn" id="dn" @click="toggleDark()" />
+    <input
+      type="checkbox"
+      class="dn"
+      id="dn"
+      v-model="darkValue"
+      @click="toggleDark()"
+    />
     <label for="dn" class="toggle">
       <span class="toggle__handler">
         <span class="crater crater--1"></span>

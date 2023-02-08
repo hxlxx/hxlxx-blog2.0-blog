@@ -7,7 +7,7 @@ import SideBar from '../side-bar/index.vue'
 <template>
   <div>
     <div class="relative mb-10 text-[30px]">
-      <span class="flex items-center gap-2 py-1 text-[var(--text-bright)]">
+      <span class="flex items-center gap-2 py-1 text-bright">
         <BookOne size="2rem" />
         <span class="font-medium">
           {{ $t('title.articles') }}

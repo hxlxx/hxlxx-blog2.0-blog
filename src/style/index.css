@@ -1,3 +1,4 @@
 @import url('./commen.css');
 @import url('./theme-variables.css');
 @import url('./tailwind.css');
+@import url('./components/article-preview.css');

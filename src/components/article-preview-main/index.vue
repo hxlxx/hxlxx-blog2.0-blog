@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { TArticle } from '@/types'
-import { Pushpin } from '@icon-park/vue-next'
 import type { Icon } from '@icon-park/vue-next/lib/runtime'
+import { useDateFormat } from '@vueuse/core'
 
 type Props = {
-  icon: Icon
-  article: TArticle
+  tagIcon?: Icon
+  tagLabel?: string
+  article?: TArticle
 }
 
 defineProps<Props>()
@@ -13,16 +14,22 @@ defineProps<Props>()
 
 <template>
   <div class="relative group z-10">
-    <span class="article-tag">
+    <span v-if="tagLabel" class="article-tag">
       <b class="article-tag-content">
-        <Pushpin />
-        {{ $t('articleTag.pinned') }}
+        <component :is="tagIcon" />
+        {{ $t(`articleTag.${tagLabel}`) }}
       </b>
     </span>
     <div class="flex flex-col lg:flex-row w-full h-98 card group-hover-scale">
       <div class="w-full lg:w-1/2 h-[40%] lg:h-full">
         <div class="cover">
           <img
+            v-if="article?.cover_url"
+            class="w-full h-full object-cover rounded-xl lg:rounded-none"
+            :src="article.cover_url"
+          />
+          <img
+            v-else
             class="w-full h-full object-cover rounded-xl lg:rounded-none"
             src="@/assets/imgs/pexels-kristina-paukshtite-712876.jpg"
           />
@@ -32,23 +39,35 @@ defineProps<Props>()
         class="flex flex-col w-full lg:w-1/2 h-[60%] lg:h-full px-5 py-3 lg:p-10 z-10"
       >
         <span>
-          <b class="mr-5 text-[var(--text-accent)]">CATEGORY</b>
-          <em># TAG</em>
+          <b class="mr-5 text-[20px] text-accent">
+            {{ article?.category.category_name }}
+          </b>
+          <ul class="inline-flex gap-2">
+            <li v-for="tag in article?.tags" :key="tag.id">
+              <em># {{ tag.tag_name }}</em>
+            </li>
+          </ul>
         </span>
         <h1 class="mb-4 lg:my-6">
-          <span class="article-title transition-100"> TITLE </span>
+          <span class="article-title text-bright transition-100">
+            {{ article?.title }}
+          </span>
         </h1>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Necessitatibus ea voluptatibus minus sit amet aperiam explicabo
-          consequuntur, harum, hic labore id porro, laudantium et at vel. Non
-          quo architecto dolor? Harum sunt atque non alias voluptates accusamus
+        <p class="text-cutoff-4">
+          {{ article?.content }}
         </p>
         <div class="flex gap-4 items-center flex-1">
-          <div class="w-10 h-10 rounded-full bg-pink-400"></div>
+          <div class="w-10 h-10 rounded-full overflow-hidden cursor-pointer">
+            <img
+              class="w-full h-full object-cover"
+              :src="article?.author.avatar_url"
+            />
+          </div>
           <span class="text-sm">
-            <b class="mr-4">USERNAME</b>
-            <em>PUBLISH TIME</em>
+            <b class="mr-4 cursor-pointer hover:text-accent transition-100">
+              {{ article?.author.username }}
+            </b>
+            <em>{{ useDateFormat(article?.created_at, 'MMM, D, YYYY') }}</em>
           </span>
         </div>
       </div>
@@ -73,6 +92,6 @@ defineProps<Props>()
   }
 }
 .article-title {
-  @apply text-[24px] lg:text-[32px] text-[var(--text-bright)] font-semibold cursor-pointer hover:opacity-50;
+  @apply text-[24px] lg:text-[32px] font-semibold cursor-pointer hover:opacity-50;
 }
 </style>

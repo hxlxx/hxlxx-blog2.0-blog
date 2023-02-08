@@ -2,6 +2,12 @@
 import { Search, Sphere } from '@icon-park/vue-next'
 import { useI18n } from 'vue-i18n'
 
+type Props = {
+  logo: string
+}
+
+defineProps<Props>()
+
 const i18n = useI18n()
 
 const navHeaderRef = ref<HTMLElement>()
@@ -77,10 +83,11 @@ const handleChangeLanguage = () => {
       class="flex items-center w-full h-32 px-3 lg:pl-16 lg:pr-20 fixed top-0 left-0 text-white z-20 theme-gradient"
     >
       <div
-        class="h-full flex flex-col justify-center items-center cursor-pointer"
+        class="relative h-full flex flex-col justify-center items-center cursor-pointer"
       >
         <span class="logo-text"> 昏晓流霞 </span>
         <span class="logo-text"> HXLX </span>
+        <img class="absolute top-0 left-0 opacity-10 -z-10" :src="logo" />
       </div>
       <div class="ml-5 hidden lg:block">
         <ul class="flex gap-5">
@@ -133,6 +140,10 @@ const handleChangeLanguage = () => {
 </template>
 
 <style lang="postcss" scoped>
+.logo-text {
+  @apply text-white text-[30px] font-semibold;
+  text-shadow: var(--text-shadow);
+}
 .nav-item {
   @apply px-3 py-1 rounded-md hover:bg-stone-200 cursor-pointer;
   transition: var(--transition-200);

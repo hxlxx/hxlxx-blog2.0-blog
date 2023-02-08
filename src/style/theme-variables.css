@@ -10,6 +10,9 @@
   --transition-100: all 100ms linear;
   --transition-200: all 200ms linear;
   --background-trans: rgba(0, 0, 0, 0.15);
+  --max-lines-2: 2;
+  --max-lines-3: 3;
+  --max-lines-4: 4;
 }
 
 :root[theme='light'] {
@@ -17,7 +20,7 @@
   --background-secondary: #fff;
   --text-bright: #000;
   --text-normal: #333;
-  --card-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.1);
+  --shadow-primary: 1px 1px 10px 2px rgba(0, 0, 0, 0.1);
   --text-accent: #478bd6;
   --article-cover-row: linear-gradient(
     90deg,
@@ -64,7 +67,7 @@
   --background-secondary: #212121;
   --text-bright: #fff;
   --text-normal: #bebebe;
-  --card-shadow: 1px 1px 10px 2px rgba(255, 255, 255, 0.1);
+  --shadow-primary: 1px 1px 10px 2px rgba(255, 255, 255, 0.1);
   --text-accent: #fcb955;
   --article-cover-row: linear-gradient(
     90deg,

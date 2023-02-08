@@ -8,3 +8,7 @@ body {
 #app {
   height: 100%;
 }
+
+.test {
+  @apply bg-red-300;
+}
