@@ -10,7 +10,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="profile-card relative mb-10 text-normal">
+  <div class="profile-card relative text-normal">
     <div class="w-full h-full rounded-xl bg-primary opacity-90">
       <div
         class="absolute top-0 left-0 flex flex-col justify-around w-full h-full px-3"
@@ -22,44 +22,44 @@ defineProps<Props>()
           >
             <img
               class="w-full h-full object-cover rounded-full"
-              :src="profile.websiteConfig.author_avatar"
+              :src="profile?.websiteConfig?.author_avatar"
             />
           </div>
           <!-- 昵称 -->
           <h1 class="text-[30px] text-bright font-semibold">
-            {{ profile.websiteConfig.author }}
+            {{ profile?.websiteConfig?.author }}
           </h1>
           <span
             class="inline-block w-[20%] h-1 mb-5 rounded-[2px] theme-gradient"
           ></span>
           <!-- 简介 -->
-          <span>{{ profile.websiteConfig.author_motto }}</span>
+          <span>{{ profile?.websiteConfig?.author_motto }}</span>
         </div>
         <div>
           <!-- 链接 -->
           <ul class="flex justify-center gap-3">
             <li class="profile-link">
-              <a :href="profile.websiteConfig.github">
-                <Github size="20px" />
+              <a :href="profile?.websiteConfig?.github">
+                <github size="20px" />
               </a>
             </li>
           </ul>
           <!-- 网站统计 -->
           <ul class="flex justify-around mt-5">
             <li class="site-count-item">
-              <span class="font-semibold">{{ profile.articleCount }}</span>
+              <span class="font-semibold">{{ profile?.articleCount }}</span>
               <span>{{ $t('profile.articles') }}</span>
             </li>
             <li class="site-count-item">
-              <span class="font-semibold">{{ profile.talkCount }}</span>
+              <span class="font-semibold">{{ profile?.talkCount }}</span>
               <span>{{ $t('profile.talks') }}</span>
             </li>
             <li class="site-count-item">
-              <span class="font-semibold">{{ profile.categoryCount }}</span>
+              <span class="font-semibold">{{ profile?.categoryCount }}</span>
               <span>{{ $t('profile.categories') }}</span>
             </li>
             <li class="site-count-item">
-              <span class="font-semibold">{{ profile.tagCount }}</span>
+              <span class="font-semibold">{{ profile?.tagCount }}</span>
               <span>{{ $t('profile.tags') }}</span>
             </li>
           </ul>

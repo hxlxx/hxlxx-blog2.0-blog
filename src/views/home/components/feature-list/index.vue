@@ -32,7 +32,7 @@ const initFeatureArticles = async () => {
           <span
             class="flex items-center gap-1 break-all text-bright text-[28px] font-semibold"
           >
-            <Fire size="2rem" />
+            <fire size="2rem" />
             <span class="max-w-[140px]">{{ $t('featureArticles') }}</span>
           </span>
         </div>

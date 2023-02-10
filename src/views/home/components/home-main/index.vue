@@ -8,7 +8,7 @@ import SideBar from '../side-bar/index.vue'
   <div>
     <div class="relative mb-10 text-[30px]">
       <span class="flex items-center gap-2 py-1 text-bright">
-        <BookOne size="2rem" />
+        <book-one size="2rem" />
         <span class="font-medium">
           {{ $t('title.articles') }}
         </span>
@@ -19,9 +19,9 @@ import SideBar from '../side-bar/index.vue'
     </div>
     <div class="w-full flex gap-[30px]">
       <!-- 文章分类 -->
-      <article-list />
+      <article-list class="flex-1" />
       <!-- 侧边栏 -->
-      <side-bar />
+      <side-bar class="w-[324px]" />
     </div>
   </div>
 </template>

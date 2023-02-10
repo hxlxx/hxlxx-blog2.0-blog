@@ -10,10 +10,11 @@ type Props = {
 }
 
 defineProps<Props>()
+const router = useRouter()
 </script>
 
 <template>
-  <div class="relative group z-10">
+  <div class="relative group">
     <span v-if="tagLabel" class="article-tag">
       <b class="article-tag-content">
         <component :is="tagIcon" />
@@ -38,7 +39,7 @@ defineProps<Props>()
       <div class="flex flex-col w-full h-[60%] px-5 py-3 z-10">
         <span>
           <b class="mr-3 text-[20px] text-accent">
-            {{ article?.category.category_name }}
+            {{ article?.category?.category_name }}
           </b>
           <ul class="inline-flex gap-2">
             <li v-for="tag in article?.tags" :key="tag.id">
@@ -46,8 +47,13 @@ defineProps<Props>()
             </li>
           </ul>
         </span>
-        <h1 class="mb-2">
-          <span class="article-title transition-100">
+        <h1
+          class="mb-2"
+          @click="
+            router.push({ name: 'article-detail', params: { id: article?.id } })
+          "
+        >
+          <span class="article-title text-bright transition-100">
             {{ article?.title }}
           </span>
         </h1>
@@ -58,12 +64,12 @@ defineProps<Props>()
           <div class="w-7 h-7 rounded-full overflow-hidden cursor-pointer">
             <img
               class="w-full h-full object-cover"
-              :src="article?.author.avatar_url"
+              :src="article?.author?.avatar_url"
             />
           </div>
           <span class="text-xs">
             <b class="mr-4 cursor-pointer hover:text-accent">
-              {{ article?.author.username }}
+              {{ article?.author?.username }}
             </b>
             <em>{{ useDateFormat(article?.created_at, 'MMM, D, YYYY') }}</em>
           </span>
@@ -86,6 +92,6 @@ defineProps<Props>()
   }
 }
 .article-title {
-  @apply text-[24px] text-bright font-semibold cursor-pointer hover:opacity-50;
+  @apply text-[24px] font-semibold cursor-pointer hover:opacity-50;
 }
 </style>

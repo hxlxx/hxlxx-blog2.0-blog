@@ -24,4 +24,6 @@ export type TArticle = {
   category: TCategory
   tags: TTag[]
   author: User
+  preArticle: TArticle
+  nextArticle: TArticle
 }

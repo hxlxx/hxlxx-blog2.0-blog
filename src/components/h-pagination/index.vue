@@ -47,7 +47,7 @@ const handleChangePage = (index: number) => {
         class="text-bright page-bar"
         @click="emits('onChangePage', --current)"
       >
-        <LeftOne class="text-accent" :stroke-width="6" size="20px" />
+        <left-one class="text-accent" :stroke-width="6" size="20px" />
         <b class="text-[20px]">pre</b>
       </li>
       <li
@@ -90,7 +90,7 @@ const handleChangePage = (index: number) => {
         @click="emits('onChangePage', ++current)"
       >
         <b class="text-[20px]">nxt</b>
-        <RightOne class="text-accent" :stroke-width="6" size="20px" />
+        <right-one class="text-accent" :stroke-width="6" size="20px" />
       </li>
     </ul>
   </div>

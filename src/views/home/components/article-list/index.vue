@@ -49,7 +49,7 @@ const handleChangePage = (page: number) => {
 </script>
 
 <template>
-  <div class="flex-1">
+  <div>
     <div class="mb-10">
       <ul
         class="relative flex gap-5 flex-wrap pl-5 pr-12 py-4 rounded-xl text-sm text-normal overflow-hidden bg-secondary shadow-primary"
@@ -91,7 +91,7 @@ const handleChangePage = (page: number) => {
           }"
           @click="handleExpandTags"
         >
-          <ExpandDownOne size="20px" />
+          <expand-down-one size="20px" />
         </li>
       </ul>
     </div>

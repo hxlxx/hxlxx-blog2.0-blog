@@ -25,7 +25,7 @@ const initWebsiteProfile = async () => {
   <div class="bg-primary transition-200">
     <!-- 顶部导航栏 -->
     <app-header :logo="logo" />
-    <div class="mx-5 lg:mx-auto lg:max-w-[1700px] pt-36 lg:px-10">
+    <div class="mx-5 relative z-10 lg:mx-auto lg:max-w-[1700px] pt-36 lg:px-10">
       <router-view />
     </div>
     <!-- 页脚 -->

@@ -38,6 +38,11 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/\/api/, '')
+      },
+      '/yiyan': {
+        target: 'https://v1.hitokoto.cn?encode=joson&max_length=20',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/\/yiyan/, '')
       }
     }
   }

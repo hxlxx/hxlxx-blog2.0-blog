@@ -1,5 +1,6 @@
 import type { TQueryInfo } from '@/types'
 import { request } from '@/utils'
+import axios from 'axios'
 
 // 获取文章
 export const getArticleList = (query?: TQueryInfo) => {
@@ -15,6 +16,9 @@ export const getPinnedArticle = () => {
 export const getFeaturedArticle = () => {
   return request.get('/article/featured')
 }
+export const getArticleDetail = (id: number) => {
+  return request.get(`/article/detail/${id}`)
+}
 
 // 获取分类
 export const getCategoryAndCount = () => {
@@ -29,4 +33,9 @@ export const getTagAndCount = () => {
 // 获取网站信息
 export const getWebSiteProfile = () => {
   return request.get('/site/profile')
+}
+
+// 一言接口
+export const getYiYan = () => {
+  return axios.get('/yiyan')
 }

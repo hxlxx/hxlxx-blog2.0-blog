@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Search, Sphere } from '@icon-park/vue-next'
 import { useI18n } from 'vue-i18n'
+import { navList } from './constant'
 
 type Props = {
   logo: string
@@ -9,14 +10,15 @@ type Props = {
 defineProps<Props>()
 
 const i18n = useI18n()
+const router = useRouter()
 
 const navHeaderRef = ref<HTMLElement>()
-let memo: number = 0
+let positionsMemo: number = 0
 
 // 处理导航栏滚动
 window.addEventListener('scroll', () => {
-  const down = window.scrollY - memo > 0
-  memo = window.scrollY
+  const down = window.scrollY - positionsMemo > 0
+  positionsMemo = window.scrollY
   if (navHeaderRef.value) {
     navHeaderRef.value.style.transition = 'opacity 0.2s linear'
     if (down) {
@@ -84,6 +86,7 @@ const handleChangeLanguage = () => {
     >
       <div
         class="relative h-full flex flex-col justify-center items-center cursor-pointer"
+        @click="router.push('/')"
       >
         <span class="logo-text"> 昏晓流霞 </span>
         <span class="logo-text"> HXLX </span>
@@ -91,41 +94,25 @@ const handleChangeLanguage = () => {
       </div>
       <div class="ml-5 hidden lg:block">
         <ul class="flex gap-5">
-          <li class="nav-item">
-            <span>{{ $t('nav.home') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.talks') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.about') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.archives') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.tags') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.message') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.album') }}</span>
-          </li>
-          <li class="nav-item">
-            <span>{{ $t('nav.friends') }}</span>
+          <li
+            class="nav-item"
+            v-for="nav in navList"
+            :key="nav.path"
+            @click="router.push(nav.path)"
+          >
+            <span>{{ $t(`nav.${nav.label}`) }}</span>
           </li>
         </ul>
       </div>
       <div class="ml-auto flex items-center gap-4">
         <span class="nav-control">
-          <Search size="30px" />
+          <search size="30px" />
         </span>
         <span
           class="inline-flex justify-center items-center gap-1 nav-control"
           @click="handleChangeLanguage"
         >
-          <Sphere size="30px" />
+          <sphere size="30px" />
           <b>{{ $t('nav.language') }}</b>
         </span>
         <span class="nav-control">
