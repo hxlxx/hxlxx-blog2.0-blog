@@ -33,7 +33,9 @@ defineProps<Props>()
             class="inline-block w-[20%] h-1 mb-5 rounded-[2px] theme-gradient"
           ></span>
           <!-- 简介 -->
-          <span>{{ profile?.websiteConfig?.author_motto }}</span>
+          <span class="family-shuhei">
+            {{ profile?.websiteConfig?.author_motto }}
+          </span>
         </div>
         <div>
           <!-- 链接 -->

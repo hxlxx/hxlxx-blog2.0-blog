@@ -1,5 +1,9 @@
+import hMessage from '@/components/h-message'
+import { useUser } from '@/stores'
+import type { ResponseData } from '@/types'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
 
 class HttpRequest {
   baseURL: string
@@ -16,6 +20,11 @@ class HttpRequest {
 
   setInterceptors(instance: AxiosInstance, url: string) {
     instance.interceptors.request.use((config) => {
+      if (url.indexOf('login') === -1) {
+        const userStore = useUser()
+        config.headers!['Authorization'] = userStore.token
+      }
+
       if (!Object.keys(this.queue).length) {
         // 此处开启 loading
       }
@@ -46,7 +55,7 @@ class HttpRequest {
     )
   }
 
-  request(config: AxiosRequestConfig) {
+  request(config: AxiosRequestConfig): Promise<ResponseData> {
     const instance = axios.create()
     config = {
       baseURL: this.baseURL,
@@ -58,20 +67,45 @@ class HttpRequest {
     return instance(config)
   }
 
-  get(url: string, options?: AxiosRequestConfig) {
+  baseRequest(
+    url: string,
+    method: string,
+    options?: AxiosRequestConfig
+  ): Promise<ResponseData> {
     return this.request({
       url,
-      method: 'GET',
+      method,
       ...options
     })
+      .then((res) => {
+        return Promise.resolve(res)
+      })
+      .catch((error) => {
+        const i18n = useI18n()
+        if (error.data.code === 418) {
+          hMessage({
+            type: 'danger',
+            message: i18n.t('message.disableUser')
+          })
+        } else {
+          hMessage({
+            type: 'danger',
+            message: error?.data?.message || error
+          })
+        }
+      }) as unknown as Promise<ResponseData>
+  }
+
+  get(url: string, options?: AxiosRequestConfig) {
+    return this.baseRequest(url, 'GET', options)
   }
 
   post(url: string, options: AxiosRequestConfig) {
-    return this.request({
-      url,
-      method: 'POST',
-      ...options
-    })
+    return this.baseRequest(url, 'POST', options)
+  }
+
+  patch(url: string, options: AxiosRequestConfig) {
+    return this.baseRequest(url, 'PATCH', options)
   }
 }
 

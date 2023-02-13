@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useUser } from '@/stores'
+import { emptyObject } from '@/utils'
 import { Search, Sphere } from '@icon-park/vue-next'
 import { useI18n } from 'vue-i18n'
 import { navList } from './constant'
+import Login from './components/login/index.vue'
+import UserInfo from './components/user-info/index.vue'
 
 type Props = {
   logo: string
@@ -11,9 +15,12 @@ defineProps<Props>()
 
 const i18n = useI18n()
 const router = useRouter()
+const userStore = useUser()
 
 const navHeaderRef = ref<HTMLElement>()
 let positionsMemo: number = 0
+const dialogVisible = ref<boolean>(false)
+const logged = computed(() => !!userStore.token)
 
 // 处理导航栏滚动
 window.addEventListener('scroll', () => {
@@ -36,6 +43,10 @@ window.addEventListener('scroll', () => {
 // 切换语言
 const handleChangeLanguage = () => {
   i18n.locale.value = i18n.locale.value === 'zh-CN' ? 'en-US' : 'zh-CN'
+}
+// 打开登录框
+const handleOpenDialog = () => {
+  dialogVisible.value = !dialogVisible.value
 }
 </script>
 
@@ -105,9 +116,11 @@ const handleChangeLanguage = () => {
         </ul>
       </div>
       <div class="ml-auto flex items-center gap-4">
+        <!-- 搜索 -->
         <span class="nav-control">
           <search size="30px" />
         </span>
+        <!-- 语言切换 -->
         <span
           class="inline-flex justify-center items-center gap-1 nav-control"
           @click="handleChangeLanguage"
@@ -115,14 +128,39 @@ const handleChangeLanguage = () => {
           <sphere size="30px" />
           <b>{{ $t('nav.language') }}</b>
         </span>
-        <span class="nav-control">
-          <b>{{ $t('nav.login') }}</b>
+        <!-- 登录 -->
+        <span @click="handleOpenDialog">
+          <span v-if="emptyObject(userStore.user)" class="nav-control">
+            <b>{{ $t('nav.login') }}</b>
+          </span>
+          <div
+            v-else
+            class="w-12 h-12 rounded-full overflow-hidden cursor-pointer transition-300 hover:shadow-primary hover:rotate-[360deg]"
+          >
+            <img
+              class="w-full h-full object-cover"
+              :src="userStore.user.avatar_url"
+            />
+          </div>
         </span>
         <span class="nav-control">
           <theme-toggler />
         </span>
       </div>
     </div>
+    <teleport to="body">
+      <transition
+        enterFromClass="opacity-0"
+        enterActiveClass="transition-all duration-400 ease-linear"
+        enterToClass="opacity-100"
+        leaveFromClass="opacity-100"
+        leaveActiveClass="transition-all duration-400 ease-linear"
+        leaveToClass="opacity-0"
+      >
+        <login v-if="!logged" v-model="dialogVisible" />
+        <user-info v-else v-model="dialogVisible" />
+      </transition>
+    </teleport>
   </div>
 </template>
 

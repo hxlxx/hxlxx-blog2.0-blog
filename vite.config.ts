@@ -43,6 +43,11 @@ export default defineConfig({
         target: 'https://v1.hitokoto.cn?encode=joson&max_length=20',
         changeOrigin: true,
         rewrite: (path) => path.replace(/\/yiyan/, '')
+      },
+      '/qiniu': {
+        target: 'https://upload-z2.qiniup.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/\/qiniu/, '')
       }
     }
   }

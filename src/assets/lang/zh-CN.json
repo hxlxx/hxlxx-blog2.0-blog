@@ -11,9 +11,36 @@
     "language": "中文",
     "login": "登录"
   },
+  "form": {
+    "username": "用户名",
+    "password": "密码",
+    "newPassword": "新密码",
+    "email": "邮箱",
+    "code": "验证码",
+    "login": "登录",
+    "signUp": "注册",
+    "forgotPassword": "忘记密码",
+    "sendCode": "发送验证码",
+    "confirm": "确定",
+    "nickName": "昵称",
+    "changeNickName": "修改昵称",
+    "logout": "注销",
+    "error": {
+      "emailEmpty": "邮箱不能为空",
+      "emailFormat": "邮箱格式错误",
+      "passwordEmpty": "密码不能为空",
+      "passwordMinLen": "密码不能少于6位",
+      "passwordMaxLen": "密码不能多于16位",
+      "codeEmpty": "验证码不能为空",
+      "usernameEmpty": "用户名不能为空",
+      "usernameFormat": "用户名不能含有特殊字符",
+      "usernameMinLen": "用户名不能少于5位",
+      "usernameMaxLen": "用户名不能多余20位"
+    }
+  },
   "articleTag": {
     "pinned": "置顶",
-    "feature": "推荐"
+    "featured": "推荐"
   },
   "all": "全部",
   "featureArticles": "推荐文章",
@@ -30,5 +57,17 @@
     "notice": "公告",
     "websiteInfo": "网站信息",
     "catalog": "文章目录"
+  },
+  "message": {
+    "LoginSuccess": "登陆成功",
+    "sendCode": "验证码已发送",
+    "signUpSuccess": "注册成功，请去登录",
+    "imgOverSize": "图片大小不能超过5M",
+    "imgFormat": "图片格式只能为 gif, jpg, jpeg, png 或 webp",
+    "resetPasswordSuccess": "重置密码成功",
+    "resetAvatarSuccess": "重置头像成功",
+    "resetNicknameSuccess": "重置昵称成功",
+    "logout": "注销成功",
+    "disableUser": "该用户已被禁用"
   }
 }

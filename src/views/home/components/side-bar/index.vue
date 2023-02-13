@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSiteProfile } from '@/stores'
-import type { TTag, TTagAndCount, TWebsiteProfile } from '@/types'
-import { getTagAndCount } from '@/api'
+import type { TTagAndCount, TWebsiteProfile } from '@/types'
+import { getTagTop10 } from '@/api'
 import { Message } from '@icon-park/vue-next'
 import CommentsItem from './components/comments-item/index.vue'
 
@@ -13,19 +13,12 @@ const tagAndCount = ref<TTagAndCount[]>()
 
 onBeforeMount(() => {
   Object.assign(profile, profileStore.profile)
-  initTagAndCount()
+  initTagTop10()
 })
 
-const initTagAndCount = async () => {
-  const { data } = (await getTagAndCount()) || {}
+const initTagTop10 = async () => {
+  const { data } = (await getTagTop10()) || {}
   tagAndCount.value = data
-}
-// 点击标签跳转到文章列表
-const handleClickTag = ({ id, tag_name }: TTag) => {
-  router.push({
-    path: '/article-list',
-    query: { id, tag_name }
-  })
 }
 </script>
 
@@ -47,15 +40,18 @@ const handleClickTag = ({ id, tag_name }: TTag) => {
     </h-card>
     <!-- 文章标签 -->
     <h-card :title-icon="Message" title-label="tags">
-      <ul class="flex flex-wrap gap-[6px]">
+      <ul class="flex flex-wrap gap-[6px] mb-[6px]">
         <li
           v-for="tag in tagAndCount"
           :key="tag.id"
-          @click="handleClickTag(tag)"
+          @click="router.push({ path: 'article-list', query: { ...tag } })"
         >
-          <h-tag :text="tag.tag_name" :count="tag.count" />
+          <h-tag class="text-xs" :text="tag.tag_name" :count="tag.count" />
         </li>
       </ul>
+      <span class="show-more" @click="router.push('/tags')">
+        Show More...
+      </span>
     </h-card>
     <!-- 公告 -->
     <h-card :title-icon="Message" title-label="notice">
@@ -67,3 +63,13 @@ const handleClickTag = ({ id, tag_name }: TTag) => {
     </h-card>
   </div>
 </template>
+
+<style lang="postcss" scoped>
+.show-more {
+  @apply text-sm text-bright border-b-[2px] border-b-[var(--text-accent)] cursor-pointer transition-100;
+  &:hover {
+    color: var(--text-accent);
+    opacity: 0.6;
+  }
+}
+</style>

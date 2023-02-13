@@ -1,3 +1,5 @@
+import type { User } from '@/types/store/user'
+
 export type TCategory = {
   id: number
   category_name: string
@@ -6,12 +8,6 @@ export type TCategory = {
 export type TTag = {
   id: number
   tag_name: string
-}
-
-export type User = {
-  id: number
-  username: string
-  avatar_url: string
 }
 
 export type TArticle = {
@@ -26,4 +22,6 @@ export type TArticle = {
   author: User
   preArticle: TArticle
   nextArticle: TArticle
+  top: boolean
+  recommend: boolean
 }

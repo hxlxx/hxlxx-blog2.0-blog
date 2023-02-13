@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { Fire } from '@icon-park/vue-next'
 import { getFeaturedArticle } from '@/api'
 import type { TArticle } from '@/types'
-import { Fire } from '@icon-park/vue-next'
 
 const featureArticles = ref<TArticle[]>()
 
@@ -19,7 +19,7 @@ const initFeatureArticles = async () => {
   <div class="w-full flex gap-5 my-[60px]">
     <ul class="w-full flex flex-col lg:flex-row gap-5">
       <li
-        class="w-full lg:w-[20%] h-32 lg:h-96 p-1 rounded-xl bg-gradient-to-br from-[var(--theme-bg-color-one)] to-[var(--theme-bg-color-two)]"
+        class="w-full lg:w-[20%] h-44 lg:h-96 p-1 rounded-xl bg-gradient-to-br from-[var(--theme-bg-color-one)] to-[var(--theme-bg-color-two)]"
       >
         <div
           class="flex flex-col gap-5 items-center justify-center w-full h-full rounded-xl bg-secondary opacity-90"
@@ -42,11 +42,7 @@ const initFeatureArticles = async () => {
         v-for="article in featureArticles"
         :key="article.id"
       >
-        <article-preview
-          :article="article"
-          :tag-icon="Fire"
-          tag-label="feature"
-        />
+        <article-preview :article="article" />
       </li>
     </ul>
   </div>

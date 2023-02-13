@@ -9,6 +9,7 @@
   --text-shadow-primary: 1px 1px 2px #000;
   --transition-100: all 100ms linear;
   --transition-200: all 200ms linear;
+  --transition-300: all 300ms linear;
   --background-trans: rgba(0, 0, 0, 0.15);
   --max-lines-1: 1;
   --max-lines-2: 2;
@@ -17,8 +18,14 @@
 }
 
 :root[theme='light'] {
+  --color-red: theme('colors.red.500');
+  --color-blue: theme('colors.blue.500');
+  --color-orange: theme('colors.orange.500');
+  --color-green: theme('colors.green.500');
+  --color-gray: theme('colors.gray.500');
   --background-primary: #f1f3f9;
   --background-secondary: #fff;
+  --background-third: #dedede;
   --text-bright: #000;
   --text-normal: #333;
   --shadow-primary: 1px 1px 10px 2px rgba(0, 0, 0, 0.1);
@@ -64,8 +71,14 @@
 }
 
 :root[theme='dark'] {
+  --color-red: theme('colors.red.300');
+  --color-blue: theme('colors.blue.300');
+  --color-orange: theme('colors.orange.300');
+  --color-green: theme('colors.green.300');
+  --color-gray: theme('colors.gray.300');
   --background-primary: #1a1a1a;
   --background-secondary: #212121;
+  --background-third: #2c2c2c;
   --text-bright: #fff;
   --text-normal: #bebebe;
   --shadow-primary: 1px 1px 10px 2px rgba(255, 255, 255, 0.1);

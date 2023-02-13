@@ -20,5 +20,10 @@ export const routes: RouteRecordRaw[] = [
     path: '/article-detail/:id(\\d+)',
     name: 'article-detail',
     component: () => import('@/views/article-detail/index.vue')
+  },
+  {
+    path: '/tags',
+    name: 'tags',
+    component: () => import('@/views/tags/index.vue')
   }
 ]

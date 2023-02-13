@@ -1,24 +1,30 @@
 <script setup lang="ts">
 import type { TArticle } from '@/types'
-import type { Icon } from '@icon-park/vue-next/lib/runtime'
 import { useDateFormat } from '@vueuse/core'
+import { Fire } from '@icon-park/vue-next'
 
 type Props = {
-  tagIcon?: Icon
-  tagLabel?: string
   article?: TArticle
 }
 
 defineProps<Props>()
 const router = useRouter()
+
+const defaultCover = import.meta.env.VITE_DEFAULT_COVER
 </script>
 
 <template>
   <div class="relative group">
-    <span v-if="tagLabel" class="article-tag">
+    <span v-if="article?.top || article?.recommend" class="article-tag">
       <b class="article-tag-content">
-        <component :is="tagIcon" />
-        {{ $t(`articleTag.${tagLabel}`) }}
+        <Fire />
+        {{
+          $t(
+            `articleTag.${
+              article?.top ? 'pinned' : article?.recommend ? 'featured' : ''
+            }`
+          )
+        }}
       </b>
     </span>
     <div class="flex flex-col w-full h-96 card group-hover-scale">
@@ -32,7 +38,7 @@ const router = useRouter()
           <img
             v-else
             class="w-full h-full object-cover rounded-xl lg:rounded-none"
-            src="@/assets/imgs/pexels-kristina-paukshtite-712876.jpg"
+            :src="defaultCover"
           />
         </div>
       </div>

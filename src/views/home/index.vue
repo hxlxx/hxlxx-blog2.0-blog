@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { getPinnedArticle } from '@/api'
 import type { TArticle } from '@/types'
-import { Pushpin } from '@icon-park/vue-next'
 import YiYan from './components/yi-yan/index.vue'
 import FeatureList from './components/feature-list/index.vue'
 import HomeMain from './components/home-main/index.vue'
@@ -23,11 +22,7 @@ const initPinnedArticle = async () => {
     <!-- 每日一句 -->
     <yi-yan />
     <!-- 置顶文章 -->
-    <article-preview-main
-      :article="pinnedArticle"
-      :tag-icon="Pushpin"
-      tag-label="pinned"
-    />
+    <article-preview-main :article="pinnedArticle" />
     <!-- 推荐文章 -->
     <feature-list />
     <!-- 文章列表 -->

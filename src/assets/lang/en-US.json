@@ -11,9 +11,36 @@
     "language": "EN",
     "login": "LOGIN"
   },
+  "form": {
+    "username": "Username",
+    "password": "Password",
+    "newPassword": "New Password",
+    "email": "Email",
+    "code": "Code",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "forgotPassword": "Forgot Password",
+    "sendCode": "Send Code",
+    "confirm": "Confirm",
+    "nickName": "Nick Name",
+    "changeNickName": "Change Nick Name",
+    "logout": "Logout",
+    "error": {
+      "emailEmpty": "The email couldn't be empty",
+      "emailFormat": "Incorrect email format",
+      "passwordEmpty": "The password couldn't be empty",
+      "passwordMinLen": "The password length couldn't be less than 6",
+      "passwordMaxLen": "The password length couldn't be more than 16",
+      "codeEmpty": "The code couldn't be empty",
+      "usernameEmpty": "The username couldn't be empty",
+      "usernameFormat": "The username couldn't contain special characters",
+      "usernameMinLen": "The username length couldn't be less than 5",
+      "usernameMaxLen": "The username length couldn't be more than 20"
+    }
+  },
   "articleTag": {
     "pinned": "PINNED",
-    "feature": "FEATURED"
+    "featured": "FEATURED"
   },
   "all": "ALL",
   "featureArticles": "FEATURE ARTICLES",
@@ -30,5 +57,17 @@
     "notice": "NOTICE",
     "websiteInfo": "WEBSITE INFO",
     "catalog": "CATALOG"
+  },
+  "message": {
+    "LoginSuccess": "Login successfully",
+    "sendCode": "The code has sent",
+    "signUpSuccess": "Sign up successfully, please login",
+    "imgOverSize": "The image size couldn't be larger than 5M",
+    "imgFormat": "The image format should only be gif, jpg, jpeg, png or webp",
+    "resetPasswordSuccess": "Reset password successfully",
+    "resetAvatarSuccess": "Reset avatar successfully",
+    "resetNicknameSuccess": "Reset nickname successfully",
+    "logout": "Logout successfully",
+    "disableUser": "The user has been disabled"
   }
 }
