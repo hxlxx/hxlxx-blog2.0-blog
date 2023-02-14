@@ -47,24 +47,28 @@
   }
   .text-cutoff-1 {
     display: -webkit-box;
+    word-break: break-all;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--max-lines-1);
   }
   .text-cutoff-2 {
     display: -webkit-box;
+    word-break: break-all;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--max-lines-2);
   }
   .text-cutoff-3 {
     display: -webkit-box;
+    word-break: break-all;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--max-lines-3);
   }
   .text-cutoff-4 {
     display: -webkit-box;
+    word-break: break-all;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--max-lines-4);

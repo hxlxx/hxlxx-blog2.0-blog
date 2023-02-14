@@ -17,7 +17,7 @@
   --max-lines-4: 4;
 }
 
-:root[theme='light'] {
+:root[class='light'] {
   --color-red: theme('colors.red.500');
   --color-blue: theme('colors.blue.500');
   --color-orange: theme('colors.orange.500');
@@ -70,7 +70,7 @@
   );
 }
 
-:root[theme='dark'] {
+:root[class='dark'] {
   --color-red: theme('colors.red.300');
   --color-blue: theme('colors.blue.300');
   --color-orange: theme('colors.orange.300');

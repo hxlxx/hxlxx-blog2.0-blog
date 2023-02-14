@@ -3,7 +3,7 @@ import { getArticleDetail } from '@/api'
 import { useSiteProfile } from '@/stores'
 import type { TArticle, TWebsiteProfile } from '@/types'
 import { useDateFormat } from '@vueuse/core'
-import { RocketOne, LeftC, MessageEmoji } from '@icon-park/vue-next'
+import { RocketOne, LeftC, MessageEmoji, Back, Next } from '@icon-park/vue-next'
 import MdEditorV3 from 'md-editor-v3'
 import * as tocbot from 'tocbot'
 
@@ -11,6 +11,7 @@ const route = useRoute()
 const router = useRouter()
 const profileStore = useSiteProfile()
 
+const commentRef = ref<HTMLElement>()
 const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 const article = ref<TArticle>({ content: '' } as TArticle)
 
@@ -37,7 +38,7 @@ const initArticleDetail = async (id: number) => {
 const initTocbot = () => {
   tocbot.init({
     tocSelector: '#tocbot',
-    contentSelector: '.test',
+    contentSelector: '.article',
     headingSelector: 'h1, h2, h3',
     hasInnerContainers: false,
     headingsOffset: -200, // toc-list 判断 active 的基准线，以 document 为参照
@@ -58,21 +59,27 @@ const handleToTop = () => {
     behavior: 'smooth'
   })
 }
-const handleToComments = () => {}
+const handleToComments = () => {
+  commentRef.value?.scrollIntoView({
+    behavior: 'smooth'
+  })
+}
 </script>
 
 <template>
   <div>
-    <div class="text-white">
+    <div class="text-white text-shadow-primary">
       <div class="flex gap-3 text-sm">
-        <b class="text-shadow-primary">{{ article.category?.category_name }}</b>
+        <b>{{ article.category?.category_name }}</b>
         <ul class="flex gap-3">
           <li v-for="tag in article.tags" :key="tag.id">
-            <span class="text-shadow-primary"># {{ tag.tag_name }}</span>
+            <span># {{ tag.tag_name }}</span>
           </li>
         </ul>
       </div>
-      <h1 class="text-[64px] text-shadow-primary">{{ article.title }}</h1>
+      <h1 class="text-[32px] lg:text-[64px] transition-200">
+        {{ article.title }}
+      </h1>
       <div class="flex gap-3 items-center">
         <div class="w-[30px] h-[30px] rounded-full overflow-hidden">
           <img :src="article.author?.avatar_url" />
@@ -80,17 +87,18 @@ const handleToComments = () => {}
         <b class="opacity-80">{{ article.author?.username }}</b>
         <span class="flex gap-2 opacity-70">
           <span>
-            published on
             <em>{{ useDateFormat(article.created_at, 'MMM, d, YYYY') }}</em>
           </span>
-          <span>{{ (article.content.length / 1000).toFixed(1) + 'K' }}</span>
-          <span>time-1min</span>
+          <span class="hidden md:inline">
+            {{ (article.content.length / 1000).toFixed(1) + 'K' }}
+          </span>
+          <span class="hidden md:inline">time-1min</span>
         </span>
       </div>
     </div>
     <div class="flex gap-10 mt-10">
       <div class="flex-1">
-        <div class="test card p-10">
+        <div class="article card p-10">
           <md-editor-v3
             class="md-editor"
             v-model="article!.content"
@@ -103,24 +111,38 @@ const handleToComments = () => {}
           />
         </div>
         <div class="my-10">
-          <div class="flex justify-between mb-5">
-            <span>previous</span>
-            <span>next</span>
-          </div>
-          <div class="flex gap-10">
-            <div class="w-1/2">
+          <div class="grid gap-5 grid-cols-1 lg:grid-cols-2">
+            <div>
+              <div class="text-center lg:text-left">
+                <span class="relation">
+                  <Back fill="var(--text-accent)" :stroke-width="5" />
+                  previous
+                  <span
+                    class="absolute bottom-0 left-0 w-full lg:w-[60px] h-1 rounded-[1px] theme-gradient"
+                  ></span>
+                </span>
+              </div>
               <article-preview :article="article.preArticle" />
             </div>
-            <div class="w-1/2">
+            <div>
+              <div class="text-center lg:text-right">
+                <span class="relation">
+                  next
+                  <Next fill="var(--text-accent)" :stroke-width="5" />
+                  <span
+                    class="absolute bottom-0 right-0 w-full lg:w-[60px] h-1 rounded-[1px] theme-gradient"
+                  ></span>
+                </span>
+              </div>
               <article-preview :article="article.nextArticle" />
             </div>
           </div>
         </div>
-        <div>
-          <div class="card p-10 h-[1000px]"></div>
+        <div ref="commentRef" class="card">
+          <h-comments />
         </div>
       </div>
-      <div class="hidden lg:flex flex-col gap-10 w-[324px]">
+      <div class="hidden xl:flex flex-col gap-10 w-[324px] flex-shrink-0">
         <profile-card :profile="profile" />
         <div class="sticky top-[130px] left-0">
           <div class="card p-10 pt-5 mb-10">
@@ -129,7 +151,7 @@ const handleToComments = () => {}
             </h1>
             <div id="tocbot"></div>
           </div>
-          <div class="card flex justify-around items-center p-5">
+          <div class="card flex justify-center items-center gap-12 p-5">
             <div class="action-bar" @click="router.go(-1)">
               <left-c size="32px" />
             </div>
@@ -207,6 +229,9 @@ const handleToComments = () => {}
   }
 }
 .action-bar {
-  @apply cursor-pointer transition-100 text-bright hover:text-accent;
+  @apply cursor-pointer transition-100 text-bright transition-200 hover:text-accent;
+}
+.relation {
+  @apply relative inline-flex items-center gap-2 pb-3 mb-10 text-bright text-[24px];
 }
 </style>

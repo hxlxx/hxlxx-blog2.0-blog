@@ -68,6 +68,8 @@
     "resetAvatarSuccess": "Reset avatar successfully",
     "resetNicknameSuccess": "Reset nickname successfully",
     "logout": "Logout successfully",
-    "disableUser": "The user has been disabled"
+    "disableUser": "The user has been disabled",
+    "commentAfterLogin": "You should login before comment",
+    "commentSuccess": "Comment successfully"
   }
 }

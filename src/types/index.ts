@@ -1,5 +1,5 @@
 export * from './components/article-preview'
-export * from './components/home-main'
+export * from './components/home'
 export * from './components/login'
 export * from './store/site-profile'
 export * from './store/user'

@@ -20,6 +20,7 @@
     "postcss-preset-env": "^8.0.1",
     "sass": "^1.58.0",
     "tocbot": "^4.20.1",
+    "undraw-ui": "0.8.2",
     "vue": "^3.2.45",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"

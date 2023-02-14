@@ -10,7 +10,7 @@ const profileStore = useSiteProfile()
 
 const beianNumber = ref<string>('')
 const logo = ref<string>('')
-const whiteList = [
+const navList = [
   'talks',
   'about',
   'archives',
@@ -37,15 +37,17 @@ const initWebsiteProfile = async () => {
     <!-- 顶部导航栏 -->
     <app-header :logo="logo" />
     <div class="mx-5 relative z-10 lg:mx-auto lg:max-w-[1700px] pt-36 lg:px-10">
-      <div v-if="whiteList.includes(route.name as string)" class="mb-10">
-        <div class="flex items-center text-white">
+      <div v-if="navList.includes(route.name as string)" class="mb-10">
+        <div class="flex items-center text-white text-shadow-primary">
           <span>Home</span>
           <Right />
           <span>
             {{ route.name }}
           </span>
         </div>
-        <h1 class="text-[64px] text-white text-shadow-primary uppercase">
+        <h1
+          class="text-[32px] lg:text-[64px] text-white text-shadow-primary uppercase transition-200"
+        >
           {{ route.name }}
         </h1>
       </div>

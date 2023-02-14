@@ -3,6 +3,7 @@ export type User = {
   email: string
   username: string
   avatar_url: string
+  address: string
 }
 
 export type UserState = {

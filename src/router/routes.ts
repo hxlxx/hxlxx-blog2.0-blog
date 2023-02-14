@@ -25,5 +25,10 @@ export const routes: RouteRecordRaw[] = [
     path: '/tags',
     name: 'tags',
     component: () => import('@/views/tags/index.vue')
+  },
+  {
+    path: '/message',
+    name: 'message',
+    component: () => import('@/views/message/index.vue')
   }
 ]

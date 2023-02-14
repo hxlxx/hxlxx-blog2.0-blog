@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSiteProfile } from '@/stores'
-import type { TTagAndCount, TWebsiteProfile } from '@/types'
-import { getTagTop10 } from '@/api'
+import type { TCommentItem, TTagAndCount, TWebsiteProfile } from '@/types'
+import { getTagTop10, getRecentlyComment } from '@/api'
 import { Message } from '@icon-park/vue-next'
 import CommentsItem from './components/comments-item/index.vue'
 
@@ -10,15 +10,21 @@ const profileStore = useSiteProfile()
 
 const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 const tagAndCount = ref<TTagAndCount[]>()
+const commentList = ref<TCommentItem[]>()
 
 onBeforeMount(() => {
   Object.assign(profile, profileStore.profile)
   initTagTop10()
+  initRecentlyComment()
 })
 
 const initTagTop10 = async () => {
   const { data } = (await getTagTop10()) || {}
   tagAndCount.value = data
+}
+const initRecentlyComment = async () => {
+  const { data } = (await getRecentlyComment()) || {}
+  commentList.value = data
 }
 </script>
 
@@ -33,8 +39,10 @@ const initTagTop10 = async () => {
       <ul class="flex flex-col items-center gap-1">
         <li
           class="w-full p-3 rounded-md bg-primary hover:shadow-primary transition-100"
+          v-for="comment in commentList"
+          :key="comment.id"
         >
-          <comments-item />
+          <comments-item :comment="comment" />
         </li>
       </ul>
     </h-card>

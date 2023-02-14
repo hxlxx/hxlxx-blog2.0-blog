@@ -155,7 +155,7 @@ const handleSendCode = async () => {
         countdown.value = 60
         disableButton.value = false
       }
-    }, 1000)
+    }, 1000) as unknown as number
     await getCode({ data: { email: signUpForm.email } })
     hMessage({
       type: 'success',

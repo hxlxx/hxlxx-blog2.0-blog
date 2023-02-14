@@ -68,6 +68,8 @@
     "resetAvatarSuccess": "重置头像成功",
     "resetNicknameSuccess": "重置昵称成功",
     "logout": "注销成功",
-    "disableUser": "该用户已被禁用"
+    "disableUser": "该用户已被禁用",
+    "commentAfterLogin": "登陆后才能评论",
+    "commentSuccess": "评论成功"
   }
 }

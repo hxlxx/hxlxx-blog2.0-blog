@@ -7,7 +7,7 @@ const isDark = useDark({
     const html = document.documentElement
     const theme = dark ? 'dark' : 'light'
     darkValue.value = dark
-    html.setAttribute('theme', theme)
+    html.className = theme
     localStorage.setItem('theme', theme)
   }
 })
