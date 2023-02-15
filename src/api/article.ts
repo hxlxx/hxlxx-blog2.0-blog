@@ -34,3 +34,10 @@ export const getTagTop10 = () => {
 export const getTagAndCount = () => {
   return request.get('/tag/tag-count')
 }
+
+// 获取归档信息
+export const getArchives = (query?: TQueryInfo) => {
+  return request.get(
+    `/article/archives?skip=${query?.skip || 0}&limit=${query?.limit || 0}`
+  )
+}

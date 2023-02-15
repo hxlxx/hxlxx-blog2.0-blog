@@ -30,5 +30,10 @@ export const routes: RouteRecordRaw[] = [
     path: '/message',
     name: 'message',
     component: () => import('@/views/message/index.vue')
+  },
+  {
+    path: '/archives',
+    name: 'archives',
+    component: () => import('@/views/archives/index.vue')
   }
 ]

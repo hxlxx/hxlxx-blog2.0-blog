@@ -101,7 +101,7 @@ const submit = async ({
     aid: route.params.id,
     uid: userStore.user.id,
     address: userStore.user.address,
-    content: content.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    content
   }
   const user = {
     username: userStore.user.username,

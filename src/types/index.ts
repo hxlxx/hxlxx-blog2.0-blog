@@ -1,5 +1,6 @@
 export * from './components/article-preview'
-export * from './components/home'
+export * from './views/home'
+export * from './views/archives'
 export * from './components/login'
 export * from './store/site-profile'
 export * from './store/user'
