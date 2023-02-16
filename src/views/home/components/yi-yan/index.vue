@@ -18,7 +18,7 @@ const initYiYan = async () => {
 <template>
   <div class="relative mb-[60px] bg-transparent text-primary z-10">
     <div class="paragraph">
-      <h1>{{ creator }}:</h1>
+      <h1 class="break-all">{{ creator }}:</h1>
       <p>{{ hitokoto }}</p>
     </div>
   </div>
@@ -26,7 +26,7 @@ const initYiYan = async () => {
 
 <style lang="postcss" scoped>
 .paragraph {
-  @apply flex gap-3 justify-center text-[40px] text-white family-shuhei;
+  @apply flex gap-3 justify-center text-[20px] md:text-[40px] text-white family-shuhei transition-200;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5), -1px -1px 1px #fff;
 }
 </style>

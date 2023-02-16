@@ -38,17 +38,17 @@ const initWebsiteProfile = async () => {
     <app-header :logo="logo" />
     <div class="mx-5 relative z-10 lg:mx-auto lg:max-w-[1700px] pt-36 lg:px-10">
       <div v-if="navList.includes(route.name as string)" class="mb-10">
-        <div class="flex items-center text-white text-shadow-primary">
-          <span>Home</span>
+        <div class="flex items-center text-white">
+          <span>{{ $t('nav.home') }}</span>
           <Right />
           <span>
-            {{ route.name }}
+            {{ $t(`nav.${route.name as string}`) }}
           </span>
         </div>
         <h1
           class="text-[32px] lg:text-[64px] text-white text-shadow-primary uppercase transition-200"
         >
-          {{ route.name }}
+          {{ $t(`nav.${route.name as string}`) }}
         </h1>
       </div>
       <router-view />

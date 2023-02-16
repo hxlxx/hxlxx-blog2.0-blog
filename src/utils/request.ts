@@ -1,9 +1,9 @@
 import hMessage from '@/components/h-message'
+import hMessageBox from '@/components/h-message-box'
 import { useUser } from '@/stores'
 import type { ResponseData } from '@/types'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import axios from 'axios'
-import { useI18n } from 'vue-i18n'
 
 class HttpRequest {
   baseURL: string
@@ -81,11 +81,19 @@ class HttpRequest {
         return Promise.resolve(res)
       })
       .catch((error) => {
-        const i18n = useI18n()
-        if (error.data.code === 418) {
+        const userStore = useUser()
+        if (error.data.code === 401) {
+          hMessageBox({
+            title: '提示',
+            content: '身份已过期，请重新登陆',
+            callback() {
+              userStore.clearUser()
+            }
+          })
+        } else if (error.data.code === 418) {
           hMessage({
             type: 'danger',
-            message: i18n.t('message.disableUser')
+            message: '该用户已被禁用'
           })
         } else {
           hMessage({

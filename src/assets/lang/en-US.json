@@ -1,15 +1,15 @@
 {
   "nav": {
-    "home": "HOME",
-    "talks": "TALKS",
-    "about": "ABOUT",
-    "archives": "ARCHIVES",
-    "tags": "TAGS",
-    "message": "MESSAGE",
-    "album": "ALBUM",
-    "friends": "FRIENDS",
+    "home": "Home",
+    "talks": "Talks",
+    "about": "About",
+    "archives": "Archives",
+    "tags": "Tags",
+    "message": "Message",
+    "album": "Album",
+    "friends": "Friends",
     "language": "EN",
-    "login": "LOGIN"
+    "login": "Login"
   },
   "form": {
     "username": "Username",
@@ -48,15 +48,16 @@
     "articles": "Articles",
     "talks": "Talks",
     "categories": "Categories",
-    "tags": "Tags" 
+    "tags": "Tags"
   },
   "title": {
-    "articles": "ARTICLES",
-    "recentComments": "RECENT COMMENTS",
-    "tags": "TAGS",
-    "notice": "NOTICE",
-    "websiteInfo": "WEBSITE INFO",
-    "catalog": "CATALOG"
+    "articles": "Articles",
+    "recentComments": "Recently Comments",
+    "tags": "Tags",
+    "notice": "Notice",
+    "websiteInfo": "Website Info",
+    "catalog": "Catalog",
+    "comments": "Comments"
   },
   "message": {
     "LoginSuccess": "Login successfully",
@@ -70,6 +71,16 @@
     "logout": "Logout successfully",
     "disableUser": "The user has been disabled",
     "commentAfterLogin": "You should login before comment",
-    "commentSuccess": "Comment successfully"
+    "commentSuccess": "Comment successfully",
+    "loginAgain": "Identity has expired, please log in again"
+  },
+  "button": {
+    "reply": "Reply",
+    "addComment": "Add Comment",
+    "emoji": "Emoji",
+    "loadMore": "Load More..."
+  },
+  "placeholder": {
+    "comment": "Add comment here..."
   }
 }

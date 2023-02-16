@@ -29,13 +29,11 @@ const initRecentlyComment = async () => {
 </script>
 
 <template>
-  <div class="hidden xl:block">
+  <div class="hidden xl:flex flex-col gap-10">
     <!-- 网站信息 -->
-    <div class="mb-10">
-      <profile-card :profile="profile" />
-    </div>
+    <profile-card :profile="profile" />
     <!-- 最新评论 -->
-    <h-card :title-icon="Message" title-label="recentComments">
+    <h-card :title-icon="Message" :title="$t('title.recentComments')">
       <ul class="flex flex-col items-center gap-1">
         <li
           class="w-full p-3 rounded-md bg-primary hover:shadow-primary transition-100"
@@ -47,7 +45,7 @@ const initRecentlyComment = async () => {
       </ul>
     </h-card>
     <!-- 文章标签 -->
-    <h-card :title-icon="Message" title-label="tags">
+    <h-card :title-icon="Message" :title="$t('title.tags')">
       <ul class="flex flex-wrap gap-[6px] mb-[6px]">
         <li
           v-for="tag in tagAndCount"
@@ -62,11 +60,11 @@ const initRecentlyComment = async () => {
       </span>
     </h-card>
     <!-- 公告 -->
-    <h-card :title-icon="Message" title-label="notice">
+    <h-card :title-icon="Message" :title="$t('title.notice')">
       <p class="text-sm">{{ profile?.websiteConfig?.notice }}</p>
     </h-card>
     <!-- 网站信息 -->
-    <h-card :title-icon="Message" title-label="websiteInfo">
+    <h-card :title-icon="Message" :title="$t('title.websiteInfo')">
       <span>建站时间：{{ profile?.websiteConfig?.webSite_created_at }}</span>
     </h-card>
   </div>

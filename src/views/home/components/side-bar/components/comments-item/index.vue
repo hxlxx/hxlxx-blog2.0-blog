@@ -1,22 +1,12 @@
 <script setup lang="ts">
 import type { TCommentItem } from '@/types'
 import { useDateFormat } from '@vueuse/core'
-import { emoji } from '@/utils'
+import { parseComment } from '@/utils'
 
 type Props = {
   comment: TCommentItem
 }
-const props = defineProps<Props>()
-
-const content = ref<string>('')
-
-onBeforeMount(() => {
-  const emojiReg = /\[(\S+?)\]/g
-  const html = props.comment.content
-  content.value = html.replace(emojiReg, (match) => {
-    return `<img class="emoji" src="${(emoji.allEmoji as any)[match]}"></img>`
-  })
-})
+defineProps<Props>()
 </script>
 
 <template>
@@ -27,11 +17,9 @@ onBeforeMount(() => {
     <div class="flex flex-col text-xs">
       <span class="text-accent">{{ comment.user.username }}</span>
       <span class="text-gray-500">
-        {{
-          useDateFormat(comment.createTime, 'YYYY-M-D').value.replace('"', '')
-        }}
+        {{ useDateFormat(comment.createTime, 'YYYY-M-D').value }}
       </span>
-      <p v-html="content" class="text-cutoff-2"></p>
+      <p v-html="parseComment(comment.content)" class="text-cutoff-2"></p>
     </div>
   </div>
 </template>

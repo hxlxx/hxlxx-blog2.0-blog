@@ -29,6 +29,9 @@
   .bg-secondary {
     background-color: var(--background-secondary);
   }
+  .bg-third {
+    background-color: var(--background-third);
+  }
   .text-normal {
     color: var(--text-normal);
   }

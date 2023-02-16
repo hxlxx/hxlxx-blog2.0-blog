@@ -1,23 +1,37 @@
 <script setup lang="ts">
-import { getArticleDetail } from '@/api'
-import { useSiteProfile } from '@/stores'
-import type { TArticle, TWebsiteProfile } from '@/types'
+import { createComment, getArticleDetail, getCommentList } from '@/api'
+import { useSiteProfile, useUser } from '@/stores'
+import type { TArticle, TWebsiteProfile, TComment, TQueryInfo } from '@/types'
 import { useDateFormat } from '@vueuse/core'
 import { RocketOne, LeftC, MessageEmoji, Back, Next } from '@icon-park/vue-next'
 import MdEditorV3 from 'md-editor-v3'
 import * as tocbot from 'tocbot'
+import hMessage from '@/components/h-message'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const router = useRouter()
+const i18n = useI18n()
+const userStore = useUser()
 const profileStore = useSiteProfile()
 
 const commentRef = ref<HTMLElement>()
 const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 const article = ref<TArticle>({ content: '' } as TArticle)
+const showCatalog = ref<boolean>(true)
+const commentList = ref<TComment[]>([])
+const query = reactive<TQueryInfo>({
+  page: 1,
+  skip: 0,
+  limit: 7
+})
+const total = ref<number>(0)
+const hasMore = computed(() => query.page! * query.limit! < total.value)
 
 onBeforeMount(() => {
   Object.assign(profile, profileStore.profile)
   initArticleDetail(parseInt(route.params.id as string))
+  initCommentList()
   initTocbot()
 })
 onBeforeUnmount(() => {
@@ -28,6 +42,7 @@ watch(
   () => route.params.id,
   (newVal) => {
     newVal && initArticleDetail(parseInt(newVal as string))
+    newVal && initCommentList()
   }
 )
 
@@ -35,6 +50,18 @@ const initArticleDetail = async (id: number) => {
   const { data } = (await getArticleDetail(id)) || {}
   article.value = data
 }
+const initCommentList = async () => {
+  const skip = (query.page! - 1) * query.limit!
+  const { data } =
+    (await getCommentList(
+      2,
+      { skip, limit: query.limit },
+      parseInt(route.params.id as string)
+    )) || {}
+  commentList.value = [...commentList.value, ...data.res]
+  total.value = data.count
+}
+// 初始化目录列表
 const initTocbot = () => {
   tocbot.init({
     tocSelector: '#tocbot',
@@ -50,19 +77,60 @@ const initTocbot = () => {
 }
 const handleHtmlChanged = () => {
   nextTick(() => {
-    tocbot.refresh()
+    // 目录有长度才渲染
+    showCatalog.value && tocbot.refresh()
   })
 }
+// 获取目录长度
+const handleGetCatalog = (list: any[]) => {
+  showCatalog.value = !!list.length
+}
+// 回到顶部
 const handleToTop = () => {
   window.scroll({
     top: 0,
     behavior: 'smooth'
   })
 }
+// 去评论区
 const handleToComments = () => {
   commentRef.value?.scrollIntoView({
     behavior: 'smooth'
   })
+}
+// 发布评论
+const handleSubmitComment = async (
+  content: string,
+  pid?: number,
+  reply_to?: string
+) => {
+  const comment = {
+    pid,
+    uid: userStore.user.id,
+    aid: article.value.id,
+    reply_to,
+    content,
+    type: 2
+  }
+  if (!userStore.token) {
+    return hMessage({
+      type: 'danger',
+      message: i18n.t('message.commentAfterLogin')
+    })
+  }
+  const { code } = (await createComment({ data: { comment } })) || {}
+  if (code === 200) {
+    hMessage({
+      type: 'success',
+      message: i18n.t('message.commentSuccess')
+    })
+    initCommentList()
+  }
+}
+// 加载更多评论
+const handleLoadMore = () => {
+  query.page!++
+  initCommentList()
 }
 </script>
 
@@ -108,6 +176,7 @@ const handleToComments = () => {
               color: 'var(--text-normal)'
             }"
             @on-html-changed="handleHtmlChanged"
+            @get-catalog="handleGetCatalog"
           />
         </div>
         <div class="my-10">
@@ -138,14 +207,30 @@ const handleToComments = () => {
             </div>
           </div>
         </div>
-        <div ref="commentRef" class="card">
-          <h-comments />
+        <div ref="commentRef">
+          <h-card class="p-20" :title="$t('title.comments')" :title-size="32">
+            <h-comment
+              :comments="commentList"
+              @on-submit="handleSubmitComment"
+            />
+            <div
+              v-if="hasMore"
+              class="cursor-pointer text-center mt-5"
+              @click="handleLoadMore"
+            >
+              <span
+                class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+              >
+                {{ $t('button.loadMore') }}
+              </span>
+            </div>
+          </h-card>
         </div>
       </div>
       <div class="hidden xl:flex flex-col gap-10 w-[324px] flex-shrink-0">
         <profile-card :profile="profile" />
         <div class="sticky top-[130px] left-0">
-          <div class="card p-10 pt-5 mb-10">
+          <div v-if="showCatalog" class="card p-10 pt-5 mb-10">
             <h1 class="mb-2 text-bright text-[20px]">
               <b>{{ $t('title.catalog') }}</b>
             </h1>
