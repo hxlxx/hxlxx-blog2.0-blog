@@ -6,7 +6,7 @@ export type TCommentType = 1 | 2 | 3 | 4
 export type TComment = {
   id: number
   uid: number
-  aid?: number
+  topic_id?: number
   reply: TComment[]
   reply_to: string
   content: string

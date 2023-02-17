@@ -33,7 +33,15 @@ const initRecentlyComment = async () => {
     <!-- 网站信息 -->
     <profile-card :profile="profile" />
     <!-- 最新评论 -->
-    <h-card :title-icon="Message" :title="$t('title.recentComments')">
+    <h-card>
+      <template #header>
+        <span class="card-title">
+          <Message :stroke-width="5" />
+          <span>
+            {{ $t('title.recentComments') }}
+          </span>
+        </span>
+      </template>
       <ul class="flex flex-col items-center gap-1">
         <li
           class="w-full p-3 rounded-md bg-primary hover:shadow-primary transition-100"
@@ -45,7 +53,15 @@ const initRecentlyComment = async () => {
       </ul>
     </h-card>
     <!-- 文章标签 -->
-    <h-card :title-icon="Message" :title="$t('title.tags')">
+    <h-card>
+      <template #header>
+        <span class="card-title">
+          <Message :stroke-width="5" />
+          <span>
+            {{ $t('title.tags') }}
+          </span>
+        </span>
+      </template>
       <ul class="flex flex-wrap gap-[6px] mb-[6px]">
         <li
           v-for="tag in tagAndCount"
@@ -60,11 +76,27 @@ const initRecentlyComment = async () => {
       </span>
     </h-card>
     <!-- 公告 -->
-    <h-card :title-icon="Message" :title="$t('title.notice')">
+    <h-card>
+      <template #header>
+        <span class="card-title">
+          <Message :stroke-width="5" />
+          <span>
+            {{ $t('title.notice') }}
+          </span>
+        </span>
+      </template>
       <p class="text-sm">{{ profile?.websiteConfig?.notice }}</p>
     </h-card>
     <!-- 网站信息 -->
-    <h-card :title-icon="Message" :title="$t('title.websiteInfo')">
+    <h-card>
+      <template #header>
+        <span class="card-title">
+          <Message :stroke-width="5" />
+          <span>
+            {{ $t('title.websiteInfo') }}
+          </span>
+        </span>
+      </template>
       <span>建站时间：{{ profile?.websiteConfig?.webSite_created_at }}</span>
     </h-card>
   </div>
@@ -77,5 +109,8 @@ const initRecentlyComment = async () => {
     color: var(--text-accent);
     opacity: 0.6;
   }
+}
+.card-title {
+  @apply flex items-center gap-1 py-1 text-bright text-[20px] font-semibold;
 }
 </style>

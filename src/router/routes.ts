@@ -35,5 +35,15 @@ export const routes: RouteRecordRaw[] = [
     path: '/archives',
     name: 'archives',
     component: () => import('@/views/archives/index.vue')
+  },
+  {
+    path: '/talks',
+    name: 'talks',
+    component: () => import('@/views/talks/index.vue')
+  },
+  {
+    path: '/talk/:id(\\d+)',
+    name: 'talk-comments',
+    component: () => import('@/views/talk-comments/index.vue')
   }
 ]

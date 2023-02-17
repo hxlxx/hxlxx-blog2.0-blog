@@ -8,10 +8,10 @@ export const createComment = (options: AxiosRequestConfig) => {
 export const getCommentList = (
   type: TCommentType,
   query: TQueryInfo,
-  aid?: number
+  topic_id?: number
 ) => {
   return request.get(
-    `/comment?type=${type}${aid ? `&aid=${aid}` : ''}&skip=${
+    `/comment?type=${type}${topic_id ? `&topic_id=${topic_id}` : ''}&skip=${
       query.skip || 0
     }&limit=${query.limit}`
   )

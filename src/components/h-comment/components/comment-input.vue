@@ -18,7 +18,7 @@ const faceList = emoji.faceList
 const emojiList = emoji.emojiList[0]
 const tvList = emoji.emojiList[1]
 
-document.addEventListener('click', (e: Event) => {
+const handleClick = (e: Event) => {
   if (
     (e.target as HTMLElement).id === 'comment-editor' &&
     (e.target as HTMLElement) !== commentEditorRef.value
@@ -31,6 +31,12 @@ document.addEventListener('click', (e: Event) => {
   if ((e.target as HTMLElement) !== emojiRef.value) {
     emojiBoxVisible.value = false
   }
+}
+onMounted(() => {
+  document.addEventListener('click', handleClick)
+})
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClick)
 })
 
 // 选择表情

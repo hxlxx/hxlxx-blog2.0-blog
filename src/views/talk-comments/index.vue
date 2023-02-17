@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { getCommentList, createComment } from '@/api'
+import { createComment, getCommentList, getTalkById } from '@/api'
 import hMessage from '@/components/h-message'
 import { useUser } from '@/stores'
-import type { TComment, TQueryInfo } from '@/types'
+import type { TComment, TQueryInfo, TTalk } from '@/types'
 import { useI18n } from 'vue-i18n'
 
+const route = useRoute()
 const userStore = useUser()
 const i18n = useI18n()
 
@@ -16,14 +17,26 @@ const query = reactive<TQueryInfo>({
 })
 const total = ref<number>(0)
 const hasMore = computed(() => query.page! * query.limit! < total.value)
+const talk = ref<TTalk>({} as TTalk)
 
 onBeforeMount(() => {
+  initTalk()
   initCommentList()
 })
 
+const initTalk = async () => {
+  const id = parseInt(route.params.id as string)
+  const { data } = (await getTalkById(id)) || {}
+  talk.value = data
+}
 const initCommentList = async (flag?: boolean) => {
   const skip = (query.page! - 1) * query.limit!
-  const { data } = (await getCommentList(1, { skip, limit: query.limit })) || {}
+  const { data } =
+    (await getCommentList(
+      3,
+      { skip, limit: query.limit },
+      parseInt(route.params.id as string)
+    )) || {}
   commentList.value = flag ? [...commentList.value, ...data.res] : data.res
   total.value = data.count
 }
@@ -36,9 +49,10 @@ const handleSubmitComment = async (
   const comment = {
     pid,
     uid: userStore.user.id,
+    topic_id: talk.value.id,
     reply_to,
     content,
-    type: 1
+    type: 3
   }
   if (!userStore.token) {
     return hMessage({
@@ -64,23 +78,26 @@ const handleLoadMore = () => {
 </script>
 
 <template>
-  <h-card class="px-20 py-10">
-    <template #header>
-      <h1 class="py-2 text-[32px] text-bright">
-        {{ $t('title.comments') }}
-      </h1>
-    </template>
-    <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
-    <div
-      v-if="hasMore"
-      class="cursor-pointer text-center mt-5"
-      @click="handleLoadMore"
-    >
-      <span
-        class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+  <div>
+    <talk-item :talk="talk" />
+    <h-card class="px-10 py-5 mt-10">
+      <template #header>
+        <h1 class="pt-2 text-[32px] text-bright">
+          {{ $t('title.comments') }}
+        </h1>
+      </template>
+      <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
+      <div
+        v-if="hasMore"
+        class="cursor-pointer text-center mt-5"
+        @click="handleLoadMore"
       >
-        {{ $t('button.loadMore') }}
-      </span>
-    </div>
-  </h-card>
+        <span
+          class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+        >
+          {{ $t('button.loadMore') }}
+        </span>
+      </div>
+    </h-card>
+  </div>
 </template>

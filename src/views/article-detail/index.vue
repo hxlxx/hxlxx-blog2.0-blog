@@ -4,7 +4,7 @@ import { useSiteProfile, useUser } from '@/stores'
 import type { TArticle, TWebsiteProfile, TComment, TQueryInfo } from '@/types'
 import { useDateFormat } from '@vueuse/core'
 import { RocketOne, LeftC, MessageEmoji, Back, Next } from '@icon-park/vue-next'
-import MdEditorV3 from 'md-editor-v3'
+import MdEditor from 'md-editor-v3'
 import * as tocbot from 'tocbot'
 import hMessage from '@/components/h-message'
 import { useI18n } from 'vue-i18n'
@@ -50,7 +50,7 @@ const initArticleDetail = async (id: number) => {
   const { data } = (await getArticleDetail(id)) || {}
   article.value = data
 }
-const initCommentList = async () => {
+const initCommentList = async (flag?: boolean) => {
   const skip = (query.page! - 1) * query.limit!
   const { data } =
     (await getCommentList(
@@ -58,7 +58,7 @@ const initCommentList = async () => {
       { skip, limit: query.limit },
       parseInt(route.params.id as string)
     )) || {}
-  commentList.value = [...commentList.value, ...data.res]
+  commentList.value = flag ? [...commentList.value, ...data.res] : data.res
   total.value = data.count
 }
 // 初始化目录列表
@@ -107,7 +107,7 @@ const handleSubmitComment = async (
   const comment = {
     pid,
     uid: userStore.user.id,
-    aid: article.value.id,
+    topic_id: article.value.id,
     reply_to,
     content,
     type: 2
@@ -118,19 +118,20 @@ const handleSubmitComment = async (
       message: i18n.t('message.commentAfterLogin')
     })
   }
-  const { code } = (await createComment({ data: { comment } })) || {}
+  const { code } = (await createComment({ data: comment })) || {}
   if (code === 200) {
     hMessage({
       type: 'success',
       message: i18n.t('message.commentSuccess')
     })
+    query.page = 1
     initCommentList()
   }
 }
 // 加载更多评论
 const handleLoadMore = () => {
   query.page!++
-  initCommentList()
+  initCommentList(true)
 }
 </script>
 
@@ -167,7 +168,7 @@ const handleLoadMore = () => {
     <div class="flex gap-10 mt-10">
       <div class="flex-1">
         <div class="article card p-10">
-          <md-editor-v3
+          <md-editor
             class="md-editor"
             v-model="article!.content"
             preview-only
@@ -208,7 +209,12 @@ const handleLoadMore = () => {
           </div>
         </div>
         <div ref="commentRef">
-          <h-card class="p-20" :title="$t('title.comments')" :title-size="32">
+          <h-card class="px-10 py-5">
+            <template #header>
+              <h1 class="pb-2 text-[32px] text-bright">
+                {{ $t('title.comments') }}
+              </h1>
+            </template>
             <h-comment
               :comments="commentList"
               @on-submit="handleSubmitComment"

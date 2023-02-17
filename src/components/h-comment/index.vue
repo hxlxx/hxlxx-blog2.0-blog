@@ -6,17 +6,32 @@ import { parseComment } from '@/utils'
 type Props = {
   comments: TComment[]
 }
-defineProps<Props>()
+const props = defineProps<Props>()
 const emits = defineEmits(['onSubmit'])
 
 const commentInputRef = ref<HTMLElement>()
 const activeId = ref<number>()
+const commentList = ref<TComment[]>([])
 
-document.addEventListener('click', (e: Event) => {
+const handleClick = (e: Event) => {
   if ((e.target as HTMLElement) !== commentInputRef.value) {
     activeId.value = undefined
   }
+}
+onMounted(() => {
+  document.addEventListener('click', handleClick)
 })
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClick)
+})
+
+watch(
+  () => props.comments,
+  (newVal) => {
+    newVal.length && (commentList.value = newVal)
+  },
+  { immediate: true }
+)
 
 const handleSubmitComment = (
   value: string,
@@ -37,7 +52,7 @@ const handleSubmitComment = (
       />
     </div>
     <!-- 评论区 -->
-    <div class="flex p-5 pb-0" v-for="comment in comments" :key="comment.id">
+    <div class="flex p-5 pb-0" v-for="comment in commentList" :key="comment.id">
       <!-- 头像 -->
       <div>
         <div class="w-10 h-10 rounded-full overflow-hidden">

@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     ProfileCard: typeof import('./components/profile-card/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TalkItem: typeof import('./components/talk-item/index.vue')['default']
     ThemeToggler: typeof import('./components/theme-toggler/index.vue')['default']
   }
 }

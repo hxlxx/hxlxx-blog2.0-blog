@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import type { Icon } from '@icon-park/vue-next/lib/runtime'
-
 type Props = {
-  titleIcon?: Icon
-  titleSize?: string | number
-  title: string
+  dividerWith?: string
+  dividerHeight?: string
 }
 
 defineProps<Props>()
@@ -12,23 +9,17 @@ defineProps<Props>()
 
 <template>
   <div class="p-5 rounded-xl text-normal bg-secondary shadow-primary">
-    <div class="mb-4">
+    <div class="relative mb-4">
+      <div>
+        <slot name="header" />
+      </div>
       <span
-        class="relative flex items-center gap-1 py-1 text-bright text-[20px] font-semibold"
-      >
-        <component :is="titleIcon" />
-        <span
-          :style="{
-            'font-size':
-              typeof titleSize === 'number' ? titleSize + 'px' : titleSize
-          }"
-        >
-          {{ title }}
-        </span>
-        <span
-          class="absolute left-0 bottom-0 w-16 h-1 rounded-[2px] theme-gradient"
-        ></span>
-      </span>
+        class="absolute left-0 bottom-0 min-w-[60px] w-[5%] h-1 rounded-[2px] theme-gradient"
+        :style="{
+          width: dividerWith,
+          height: dividerHeight
+        }"
+      ></span>
     </div>
     <div>
       <slot />
