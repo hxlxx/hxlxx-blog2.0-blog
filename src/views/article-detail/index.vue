@@ -293,7 +293,7 @@ const handleLoadMore = () => {
   h4::after,
   h5::after,
   h6::after {
-    @apply absolute block -bottom-2 left-0 w-[98px] h-1 rounded-[2px];
+    @apply absolute block -bottom-2 left-0 w-[98px] h-[6px] rounded-[2px];
     content: '';
     background: var(--theme-gradient);
   }

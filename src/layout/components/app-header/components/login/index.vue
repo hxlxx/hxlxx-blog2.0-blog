@@ -171,9 +171,10 @@ const handleSignUpOrResetPwd = async () => {
     validateCode(signUpForm.code)
   ) {
     const form = toRaw(signUpForm)
-    const { code } = signUpOrForgot.value
-      ? await register({ data: form })
-      : (await resetPassword({ data: form })) || {}
+    const { code } =
+      (signUpOrForgot.value
+        ? await register({ data: form })
+        : await resetPassword({ data: form })) || {}
     if (code === 200) {
       hMessage({
         type: 'success',
@@ -185,6 +186,9 @@ const handleSignUpOrResetPwd = async () => {
       })
       emits('update:modelValue', !props.modelValue)
       resetForm()
+    } else {
+      signUpForm.code = ''
+      signUpForm.password = ''
     }
   }
 }
@@ -316,7 +320,7 @@ const handleSignUpOrResetPwd = async () => {
             @click="handleSendCode"
           >
             <span v-if="!disableButton">{{ $t('form.sendCode') }}</span>
-            <span v-else>{{ countdown }}s后，重新发送</span>
+            <span v-else>{{ countdown }}{{ $t('form.sendCodeAgain') }}</span>
           </h-button>
         </div>
         <div>

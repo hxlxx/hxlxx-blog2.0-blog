@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { getTalkList } from '@/api'
-import type { TQueryInfo, TTalk } from '@/types'
+import { useSiteProfile } from '@/stores'
+import type { TQueryInfo, TTalk, TWebsiteProfile } from '@/types'
+
+const profileStore = useSiteProfile()
 
 const talkList = ref<TTalk[]>([])
 const query = reactive<TQueryInfo>({
@@ -10,9 +13,11 @@ const query = reactive<TQueryInfo>({
 })
 const total = ref<number>(0)
 const hasMore = computed(() => query.page! * query.limit! < total.value)
+const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 
 onBeforeMount(() => {
   initTalkList()
+  Object.assign(profile, profileStore.profile)
 })
 
 const initTalkList = async () => {
@@ -29,18 +34,23 @@ const handleLoadMore = () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-5">
-    <talk-item v-for="talk in talkList" :key="talk.id" :talk="talk" />
-    <div
-      v-if="hasMore"
-      class="cursor-pointer text-center mt-5"
-      @click="handleLoadMore"
-    >
-      <span
-        class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+  <div class="flex gap-5">
+    <div class="flex flex-1 flex-col gap-5">
+      <talk-item v-for="talk in talkList" :key="talk.id" :talk="talk" />
+      <div
+        v-if="hasMore"
+        class="cursor-pointer text-center mt-5"
+        @click="handleLoadMore"
       >
-        {{ $t('button.loadMore') }}
-      </span>
+        <span
+          class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+        >
+          {{ $t('button.loadMore') }}
+        </span>
+      </div>
+    </div>
+    <div class="hidden lg:block w-[324px]">
+      <profile-card :profile="profile" />
     </div>
   </div>
 </template>

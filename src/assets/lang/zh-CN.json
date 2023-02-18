@@ -21,6 +21,7 @@
     "signUp": "注册",
     "forgotPassword": "忘记密码",
     "sendCode": "发送验证码",
+    "sendCodeAgain": "s后，重新发送",
     "confirm": "确定",
     "nickName": "昵称",
     "changeNickName": "修改昵称",

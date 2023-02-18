@@ -21,6 +21,7 @@
     "signUp": "Sign Up",
     "forgotPassword": "Forgot Password",
     "sendCode": "Send Code",
+    "sendCodeAgain": "seconds later, try again",
     "confirm": "Confirm",
     "nickName": "Nick Name",
     "changeNickName": "Change Nick Name",

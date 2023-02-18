@@ -68,6 +68,7 @@ const handleSubmitComment = async (
     })
     query.page = 1
     initCommentList()
+    initTalk()
   }
 }
 // 加载更多评论

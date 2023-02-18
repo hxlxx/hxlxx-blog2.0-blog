@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { getCommentList, createComment } from '@/api'
 import hMessage from '@/components/h-message'
-import { useUser } from '@/stores'
-import type { TComment, TQueryInfo } from '@/types'
+import { useSiteProfile, useUser } from '@/stores'
+import type { TComment, TQueryInfo, TWebsiteProfile } from '@/types'
 import { useI18n } from 'vue-i18n'
 
-const userStore = useUser()
 const i18n = useI18n()
+const userStore = useUser()
+const profileStore = useSiteProfile()
 
 const commentList = ref<TComment[]>([])
 const query = reactive<TQueryInfo>({
@@ -16,9 +17,11 @@ const query = reactive<TQueryInfo>({
 })
 const total = ref<number>(0)
 const hasMore = computed(() => query.page! * query.limit! < total.value)
+const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 
 onBeforeMount(() => {
   initCommentList()
+  Object.assign(profile, profileStore.profile)
 })
 
 const initCommentList = async (flag?: boolean) => {
@@ -64,23 +67,28 @@ const handleLoadMore = () => {
 </script>
 
 <template>
-  <h-card class="px-20 py-10">
-    <template #header>
-      <h1 class="py-2 text-[32px] text-bright">
-        {{ $t('title.comments') }}
-      </h1>
-    </template>
-    <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
-    <div
-      v-if="hasMore"
-      class="cursor-pointer text-center mt-5"
-      @click="handleLoadMore"
-    >
-      <span
-        class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+  <div class="flex gap-5">
+    <h-card class="flex-1 px-20 py-10">
+      <template #header>
+        <h1 class="py-2 text-[32px] text-bright">
+          {{ $t('title.comments') }}
+        </h1>
+      </template>
+      <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
+      <div
+        v-if="hasMore"
+        class="cursor-pointer text-center mt-5"
+        @click="handleLoadMore"
       >
-        {{ $t('button.loadMore') }}
-      </span>
+        <span
+          class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+        >
+          {{ $t('button.loadMore') }}
+        </span>
+      </div>
+    </h-card>
+    <div class="hidden lg:block w-[324px]">
+      <profile-card :profile="profile" />
     </div>
-  </h-card>
+  </div>
 </template>

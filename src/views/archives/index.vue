@@ -40,7 +40,7 @@ const handleChangePage = (page: number) => {
         v-for="article in archive.list"
         :key="article.id"
       >
-        <div class="content absolute top-10 w-[40%]">
+        <div class="content absolute top-10 w-[60%] lg:w-[40%]">
           <h1
             class="title mt-[6px] mb-5 relative text-[32px] break-all family-shuhei cursor-pointer transition-200 hover:opacity-60"
             @click="
