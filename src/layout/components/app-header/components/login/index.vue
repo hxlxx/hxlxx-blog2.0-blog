@@ -215,7 +215,7 @@ const handleSignUpOrResetPwd = async () => {
             <input
               class="input-field"
               type="text"
-              v-model="loginForm.email"
+              v-model.trim="loginForm.email"
               :placeholder="$t('form.email')"
               @input="validateEmail(loginForm.email)"
             />
@@ -229,7 +229,7 @@ const handleSignUpOrResetPwd = async () => {
             <input
               class="input-field"
               type="password"
-              v-model="loginForm.password"
+              v-model.trim="loginForm.password"
               :placeholder="$t('form.password')"
               @input="validatePassword(loginForm.password)"
             />
@@ -245,7 +245,7 @@ const handleSignUpOrResetPwd = async () => {
               <input
                 class="input-field pl-1"
                 type="text"
-                v-model="loginForm.code"
+                v-model.trim="loginForm.code"
                 :placeholder="$t('form.code')"
                 @input="validateCode(loginForm.code)"
               />
@@ -290,7 +290,7 @@ const handleSignUpOrResetPwd = async () => {
             <input
               class="input-field"
               type="text"
-              v-model="signUpForm.email"
+              v-model.trim="signUpForm.email"
               :placeholder="$t('form.email')"
               @input="validateEmail(signUpForm.email)"
             />
@@ -306,7 +306,7 @@ const handleSignUpOrResetPwd = async () => {
               <input
                 class="input-field pl-1"
                 type="text"
-                v-model="signUpForm.code"
+                v-model.trim="signUpForm.code"
                 :placeholder="$t('form.code')"
               />
             </div>
@@ -330,7 +330,7 @@ const handleSignUpOrResetPwd = async () => {
             <input
               class="input-field"
               type="password"
-              v-model="signUpForm.password"
+              v-model.trim="signUpForm.password"
               :placeholder="
                 $t(`form.${signUpOrForgot ? 'password' : 'newPassword'}`)
               "

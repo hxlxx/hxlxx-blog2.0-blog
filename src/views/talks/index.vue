@@ -43,7 +43,7 @@ const handleLoadMore = () => {
         @click="handleLoadMore"
       >
         <span
-          class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+          class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-300 hover:opacity-60 shadow-primary"
         >
           {{ $t('button.loadMore') }}
         </span>

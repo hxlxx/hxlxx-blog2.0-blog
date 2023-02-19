@@ -7,7 +7,7 @@
     "tags": "Tags",
     "message": "Message",
     "album": "Album",
-    "friends": "Friends",
+    "links": "Links",
     "language": "EN",
     "login": "Login"
   },
@@ -26,6 +26,10 @@
     "nickName": "Nick Name",
     "changeNickName": "Change Nick Name",
     "logout": "Logout",
+    "linkName": "Link Name",
+    "linkAvatar": "Avatar",
+    "linkUrl": "Link",
+    "linkIntroduce": "Introduce",
     "error": {
       "emailEmpty": "The email couldn't be empty",
       "emailFormat": "Incorrect email format",
@@ -58,7 +62,8 @@
     "notice": "Notice",
     "websiteInfo": "Website Info",
     "catalog": "Catalog",
-    "comments": "Comments"
+    "comments": "Comments",
+    "shareLink": "Share Link"
   },
   "message": {
     "LoginSuccess": "Login successfully",
@@ -73,13 +78,17 @@
     "disableUser": "The user has been disabled",
     "commentAfterLogin": "You should login before comment",
     "commentSuccess": "Comment successfully",
-    "loginAgain": "Identity has expired, please log in again"
+    "loginAgain": "Identity has expired, please log in again",
+    "pleaseLogin": "Please login first",
+    "pleaseImproveInfo": "Please improve the information first",
+    "applySuccess": "Apply successfully"
   },
   "button": {
     "reply": "Reply",
     "addComment": "Add Comment",
     "emoji": "Emoji",
-    "loadMore": "Load More..."
+    "loadMore": "Load More...",
+    "apply": "Apply"
   },
   "placeholder": {
     "comment": "Add comment here..."

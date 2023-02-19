@@ -4,6 +4,7 @@ export * from './views/home'
 export * from './views/archives'
 export * from './views/message'
 export * from './views/talk'
+export * from './views/link'
 export * from './store/site-profile'
 export * from './store/user'
 

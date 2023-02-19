@@ -6,5 +6,5 @@ export const navList = [
   { label: 'tags', path: '/tags' },
   { label: 'message', path: '/message' },
   { label: 'album', path: '/album' },
-  { label: 'friends', path: '/friends' }
+  { label: 'links', path: '/links' }
 ]

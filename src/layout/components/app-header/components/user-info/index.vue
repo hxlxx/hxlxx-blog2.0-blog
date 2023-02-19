@@ -185,7 +185,7 @@ const handleLogout = () => {
                   <input
                     class="w-full p-3 rounded-lg"
                     type="text"
-                    v-model="user.username"
+                    v-model.trim="user.username"
                     :placeholder="$t('form.nickName')"
                     @input="handleChangeUsername"
                   />

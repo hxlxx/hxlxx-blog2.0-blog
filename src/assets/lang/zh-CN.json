@@ -7,7 +7,7 @@
     "tags": "标签",
     "message": "留言",
     "album": "相册",
-    "friends": "友链",
+    "links": "友链",
     "language": "中文",
     "login": "登录"
   },
@@ -26,6 +26,10 @@
     "nickName": "昵称",
     "changeNickName": "修改昵称",
     "logout": "注销",
+    "linkName": "名称",
+    "linkAvatar": "头像",
+    "linkUrl": "链接",
+    "linkIntroduce": "介绍",
     "error": {
       "emailEmpty": "邮箱不能为空",
       "emailFormat": "邮箱格式错误",
@@ -58,7 +62,8 @@
     "notice": "公告",
     "websiteInfo": "网站信息",
     "catalog": "文章目录",
-    "comments": "评论区"
+    "comments": "评论区",
+    "shareLink": "交换友链"
   },
   "message": {
     "LoginSuccess": "登陆成功",
@@ -73,13 +78,17 @@
     "disableUser": "该用户已被禁用",
     "commentAfterLogin": "登陆后才能评论",
     "commentSuccess": "评论成功",
-    "loginAgain": "身份已过期，请重新登陆"
+    "loginAgain": "身份已过期，请重新登陆",
+    "pleaseLogin": "请先登录",
+    "pleaseImproveInfo": "请先完善链接信息",
+    "applySuccess": "申请成功"
   },
   "button": {
     "reply": "回复",
     "addComment": "发表评论",
     "emoji": "表情",
-    "loadMore": "加载更多..."
+    "loadMore": "加载更多...",
+    "apply": "申请添加"
   },
   "placeholder": {
     "comment": "请输入评论内容"

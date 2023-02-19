@@ -45,5 +45,10 @@ export const routes: RouteRecordRaw[] = [
     path: '/talk/:id(\\d+)',
     name: 'talk-comments',
     component: () => import('@/views/talk-comments/index.vue')
+  },
+  {
+    path: '/links',
+    name: 'links',
+    component: () => import('@/views/links/index.vue')
   }
 ]

@@ -98,7 +98,7 @@ class HttpRequest {
         } else {
           hMessage({
             type: 'danger',
-            message: error?.data?.message || error
+            message: JSON.stringify(error?.data?.message || error)
           })
         }
       }) as unknown as Promise<ResponseData>

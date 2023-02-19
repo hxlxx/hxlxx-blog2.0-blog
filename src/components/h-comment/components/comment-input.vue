@@ -59,7 +59,7 @@ const handleSubmitComment = () => {
         ref="commentEditorRef"
         id="comment-editor"
         class="w-full p-5 border-none outline-none bg-primary rounded-xl resize-none"
-        v-model="content"
+        v-model.trim="content"
         autocomplete="off"
         :placeholder="$t('placeholder.comment')"
         @focus="actionBoxVisible = true"

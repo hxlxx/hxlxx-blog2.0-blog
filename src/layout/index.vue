@@ -17,7 +17,7 @@ const navList = [
   'tags',
   'message',
   'album',
-  'friends'
+  'links'
 ]
 
 onBeforeMount(() => {
