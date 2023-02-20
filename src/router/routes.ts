@@ -27,9 +27,9 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/tags/index.vue')
   },
   {
-    path: '/message',
-    name: 'message',
-    component: () => import('@/views/message/index.vue')
+    path: '/comment',
+    name: 'comment',
+    component: () => import('@/views/comment/index.vue')
   },
   {
     path: '/archives',

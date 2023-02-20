@@ -21,20 +21,23 @@ const initAbout = async () => {
 </script>
 
 <template>
-  <div class="flex gap-5">
-    <div class="flex-1 card px-20 py-10">
-      <md-editor
-        class="md-editor"
-        v-model="content"
-        preview-only
-        :style="{
-          backgroundColor: 'var(--bg-primary)',
-          color: 'var(--text-normal)'
-        }"
-      />
-    </div>
-    <div class="hidden lg:block w-[324px]">
-      <profile-card :profile="profile" />
+  <div>
+    <nav-breadcrumb />
+    <div class="flex gap-5">
+      <div class="flex-1 card px-20 py-10">
+        <md-editor
+          class="md-editor"
+          v-model="content"
+          preview-only
+          :style="{
+            backgroundColor: 'var(--bg-primary)',
+            color: 'var(--text-normal)'
+          }"
+        />
+      </div>
+      <div class="hidden lg:block w-[324px]">
+        <profile-card :profile="profile" />
+      </div>
     </div>
   </div>
 </template>

@@ -9,8 +9,6 @@ type Props = {
 
 defineProps<Props>()
 const router = useRouter()
-
-const defaultCover = import.meta.env.VITE_DEFAULT_COVER
 </script>
 
 <template>
@@ -31,14 +29,8 @@ const defaultCover = import.meta.env.VITE_DEFAULT_COVER
       <div class="w-full h-[40%]">
         <div class="cover">
           <img
-            v-if="article?.cover_url"
             class="w-full h-full object-cover rounded-xl lg:rounded-none"
-            :src="article.cover_url"
-          />
-          <img
-            v-else
-            class="w-full h-full object-cover rounded-xl lg:rounded-none"
-            :src="defaultCover"
+            v-lazy="article?.cover_url"
           />
         </div>
       </div>

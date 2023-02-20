@@ -63,112 +63,115 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex gap-5">
-    <div class="flex-1">
-      <div
-        class="card p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-      >
+  <div>
+    <nav-breadcrumb />
+    <div class="flex gap-5">
+      <div class="flex-1">
         <div
-          v-for="link in linkList"
-          :key="link.id"
-          class="flex items-center gap-5 p-5 bg-primary rounded-xl transition-200 hover:shadow-primary"
+          class="card p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           <div
-            class="shrink-0 w-20 h-20 rounded-full overflow-hidden transition-300 hover:shadow-primary hover:rotate-[360deg]"
+            v-for="link in linkList"
+            :key="link.id"
+            class="flex items-center gap-5 p-5 bg-primary rounded-xl transition-200 hover:shadow-primary"
           >
-            <img class="w-full h-full object-cover" :src="link.link_avatar" />
-          </div>
-          <div>
-            <a
-              :href="link.link_url"
-              class="text-bright text-[20px]"
-              target="_blank"
+            <div
+              class="shrink-0 w-20 h-20 rounded-full overflow-hidden transition-300 hover:shadow-primary hover:rotate-[360deg]"
             >
-              {{ link.link_name }}
-            </a>
-            <p class="mt-1 text-cutoff-1">
-              {{ link.link_intro }}
-            </p>
+              <img class="w-full h-full object-cover" :src="link.link_avatar" />
+            </div>
+            <div>
+              <a
+                :href="link.link_url"
+                class="text-bright text-[20px]"
+                target="_blank"
+              >
+                {{ link.link_name }}
+              </a>
+              <p class="mt-1 text-cutoff-1">
+                {{ link.link_intro }}
+              </p>
+            </div>
           </div>
         </div>
+        <h-card class="p-10 mt-10">
+          <template #header>
+            <h1 class="py-2 text-bright text-[32px]">
+              {{ $t('title.shareLink') }}
+            </h1>
+          </template>
+          <form class="flex flex-col gap-3" @submit.prevent>
+            <div class="field">
+              <label
+                class="min-w-[80px] text-left text-bright shrink-0"
+                for="name"
+              >
+                {{ $t('form.linkName') }}
+              </label>
+              <input
+                class="field-input"
+                id="name"
+                type="text"
+                autocomplete="off"
+                v-model.trim="linkForm.link_name"
+              />
+            </div>
+            <div class="field">
+              <label
+                class="min-w-[80px] text-left text-bright shrink-0"
+                for="avatar"
+              >
+                {{ $t('form.linkAvatar') }}
+              </label>
+              <input
+                class="field-input"
+                id="avatar"
+                type="text"
+                autocomplete="off"
+                v-model.trim="linkForm.link_avatar"
+              />
+            </div>
+            <div class="field">
+              <label
+                class="min-w-[80px] text-left text-bright shrink-0"
+                for="link"
+              >
+                {{ $t('form.linkUrl') }}
+              </label>
+              <input
+                class="field-input"
+                id="link"
+                type="text"
+                autocomplete="off"
+                v-model.trim="linkForm.link_url"
+              />
+            </div>
+            <div class="field">
+              <label
+                class="min-w-[80px] text-left text-bright shrink-0"
+                for="introduce"
+              >
+                {{ $t('form.linkIntroduce') }}
+              </label>
+              <input
+                class="field-input"
+                id="introduce"
+                type="text"
+                autocomplete="off"
+                v-model.trim="linkForm.link_intro"
+              />
+            </div>
+            <div class="field justify-end">
+              <h-button type="primary" @click="handleSubmit">
+                {{ $t('button.apply') }}
+              </h-button>
+            </div>
+          </form>
+        </h-card>
       </div>
-      <h-card class="p-10 mt-10">
-        <template #header>
-          <h1 class="py-2 text-bright text-[32px]">
-            {{ $t('title.shareLink') }}
-          </h1>
-        </template>
-        <form class="flex flex-col gap-3" @submit.prevent>
-          <div class="field">
-            <label
-              class="min-w-[80px] text-left text-bright shrink-0"
-              for="name"
-            >
-              {{ $t('form.linkName') }}
-            </label>
-            <input
-              class="field-input"
-              id="name"
-              type="text"
-              autocomplete="off"
-              v-model.trim="linkForm.link_name"
-            />
-          </div>
-          <div class="field">
-            <label
-              class="min-w-[80px] text-left text-bright shrink-0"
-              for="avatar"
-            >
-              {{ $t('form.linkAvatar') }}
-            </label>
-            <input
-              class="field-input"
-              id="avatar"
-              type="text"
-              autocomplete="off"
-              v-model.trim="linkForm.link_avatar"
-            />
-          </div>
-          <div class="field">
-            <label
-              class="min-w-[80px] text-left text-bright shrink-0"
-              for="link"
-            >
-              {{ $t('form.linkUrl') }}
-            </label>
-            <input
-              class="field-input"
-              id="link"
-              type="text"
-              autocomplete="off"
-              v-model.trim="linkForm.link_url"
-            />
-          </div>
-          <div class="field">
-            <label
-              class="min-w-[80px] text-left text-bright shrink-0"
-              for="introduce"
-            >
-              {{ $t('form.linkIntroduce') }}
-            </label>
-            <input
-              class="field-input"
-              id="introduce"
-              type="text"
-              autocomplete="off"
-              v-model.trim="linkForm.link_intro"
-            />
-          </div>
-          <div class="field justify-end">
-            <h-button type="primary" @click="handleSubmit">
-              {{ $t('button.apply') }}
-            </h-button>
-          </div>
-        </form>
-      </h-card>
-    </div>
-    <div class="hidden sc-1260:block w-[324px]">
-      <profile-card :profile="profile" />
+      <div class="hidden sc-1260:block w-[324px]">
+        <profile-card :profile="profile" />
+      </div>
     </div>
   </div>
 </template>

@@ -41,8 +41,11 @@ onBeforeUnmount(() => {
 watch(
   () => route.params.id,
   (newVal) => {
-    newVal && initArticleDetail(parseInt(newVal as string))
-    newVal && initCommentList()
+    if (newVal) {
+      initArticleDetail(parseInt(newVal as string))
+      query.page = 1
+      initCommentList()
+    }
   }
 )
 

@@ -28,7 +28,7 @@ onBeforeUnmount(() => {
 watch(
   () => props.comments,
   (newVal) => {
-    newVal.length && (commentList.value = newVal)
+    commentList.value = newVal
   },
   { immediate: true }
 )

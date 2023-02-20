@@ -5,8 +5,7 @@
     "about": "关于",
     "archives": "归档",
     "tags": "标签",
-    "message": "留言",
-    "album": "相册",
+    "comment": "留言",
     "links": "友链",
     "language": "中文",
     "login": "登录"
@@ -48,6 +47,7 @@
     "featured": "推荐"
   },
   "all": "全部",
+  "clickToChange": "换一换",
   "featureArticles": "推荐文章",
   "profile": {
     "articles": "文章",

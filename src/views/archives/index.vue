@@ -30,52 +30,55 @@ const handleChangePage = (page: number) => {
 </script>
 
 <template>
-  <div class="card pb-20">
-    <div class="mb-10" v-for="archive in archives" :key="archive.timeLine">
-      <h1 class="my-10 text-accent text-[48px] text-center family-shuhei">
-        {{ archive.timeLine }}
-      </h1>
-      <div
-        class="archive relative h-[200px]"
-        v-for="article in archive.list"
-        :key="article.id"
-      >
-        <div class="content absolute top-10 w-[60%] lg:w-[40%]">
-          <h1
-            class="title mt-[6px] mb-5 relative text-[32px] break-all family-shuhei cursor-pointer transition-200 hover:opacity-60"
-            @click="
-              router.push({
-                name: 'article-detail',
-                params: { id: article.id }
-              })
-            "
-          >
-            {{ article.title }}
-          </h1>
-          <p class="text-cutoff-3">{{ article.content }}</p>
-        </div>
-        <div class="line"></div>
-        <span
-          class="time absolute top-1/2 -translate-y-1/2 text-accent family-shuhei"
+  <div>
+    <nav-breadcrumb />
+    <div class="card pb-20">
+      <div class="mb-10" v-for="archive in archives" :key="archive.timeLine">
+        <h1 class="my-10 text-accent text-[48px] text-center family-shuhei">
+          {{ archive.timeLine }}
+        </h1>
+        <div
+          class="archive relative h-[200px]"
+          v-for="article in archive.list"
+          :key="article.id"
         >
-          <span class="hidden md:block">
-            {{
-              useDateFormat(article.created_at, 'YYYY-MM-DD').value.replace(
-                '"',
-                ''
-              )
-            }}
+          <div class="content absolute top-10 w-[60%] lg:w-[40%]">
+            <h1
+              class="title mt-[6px] mb-5 relative text-[32px] break-all family-shuhei cursor-pointer transition-200 hover:opacity-60"
+              @click="
+                router.push({
+                  name: 'article-detail',
+                  params: { id: article.id }
+                })
+              "
+            >
+              {{ article.title }}
+            </h1>
+            <p class="text-cutoff-3">{{ article.content }}</p>
+          </div>
+          <div class="line"></div>
+          <span
+            class="time absolute top-1/2 -translate-y-1/2 text-accent family-shuhei"
+          >
+            <span class="hidden md:block">
+              {{
+                useDateFormat(article.created_at, 'YYYY-MM-DD').value.replace(
+                  '"',
+                  ''
+                )
+              }}
+            </span>
           </span>
-        </span>
+        </div>
       </div>
+      <h-pagination
+        :page="query.page"
+        :total="total"
+        :range="5"
+        :size="query.limit"
+        @on-change-page="handleChangePage"
+      />
     </div>
-    <h-pagination
-      :page="query.page"
-      :total="total"
-      :range="5"
-      :size="query.limit"
-      @on-change-page="handleChangePage"
-    />
   </div>
 </template>
 
