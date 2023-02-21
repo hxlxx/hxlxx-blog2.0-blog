@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import { navList } from './constant'
 import Login from './components/login/index.vue'
 import UserInfo from './components/user-info/index.vue'
+import SmallNav from './components/small-nav/index.vue'
 
 type Props = {
   logo: string
@@ -22,22 +23,28 @@ let positionsMemo: number = 0
 const dialogVisible = ref<boolean>(false)
 const logged = computed(() => !!userStore.token)
 
-// 处理导航栏滚动
-window.addEventListener('scroll', () => {
+const handleScroll = () => {
   const down = window.scrollY - positionsMemo > 0
   positionsMemo = window.scrollY
-  if (navHeaderRef.value) {
-    navHeaderRef.value.style.transition = 'opacity 0.2s linear'
-    if (down) {
-      const { height } = navHeaderRef.value.getBoundingClientRect()
-      navHeaderRef.value.style.opacity =
-        window.scrollY <= height ? (height - window.scrollY) / height + '' : '0'
-      navHeaderRef.value.style.pointerEvents = 'none'
-    } else {
-      navHeaderRef.value.style.opacity = '1'
-      navHeaderRef.value.style.pointerEvents = 'inherit'
-    }
+  const el = navHeaderRef.value!
+  el.style.transition = 'opacity 0.2s linear'
+  if (down) {
+    const { height } = el.getBoundingClientRect()
+    el.style.opacity =
+      window.scrollY <= height ? (height - window.scrollY) / height + '' : '0'
+    el.style.pointerEvents = 'none'
+  } else {
+    el.style.opacity = '1'
+    el.style.pointerEvents = 'inherit'
   }
+}
+
+onMounted(() => {
+  // 处理导航栏滚动
+  window.addEventListener('scroll', handleScroll)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 
 // 切换语言
@@ -148,6 +155,9 @@ const handleOpenDialog = () => {
         </span>
       </div>
     </div>
+    <teleport to="body">
+      <small-nav />
+    </teleport>
     <teleport to="body">
       <transition
         enterFromClass="opacity-0"

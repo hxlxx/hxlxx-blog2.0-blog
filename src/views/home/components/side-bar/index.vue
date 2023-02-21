@@ -4,6 +4,7 @@ import type { TCommentItem, TTagAndCount, TWebsiteProfile } from '@/types'
 import { getTagTop10, getRecentlyComment } from '@/api'
 import { Message } from '@icon-park/vue-next'
 import CommentsItem from './components/comments-item/index.vue'
+import { useDateFormat } from '@vueuse/core'
 
 const router = useRouter()
 const profileStore = useSiteProfile()
@@ -97,7 +98,21 @@ const initRecentlyComment = async () => {
           </span>
         </span>
       </template>
-      <span>建站时间：{{ profile?.websiteConfig?.webSite_created_at }}</span>
+      <div>
+        建站时间：
+        <span>
+          {{
+            useDateFormat(
+              profile?.websiteConfig?.webSite_created_at,
+              'YYYY-MM-DD'
+            ).value
+          }}
+        </span>
+      </div>
+      <div>
+        访问次数：
+        <span>{{ profile?.viewCount }}</span>
+      </div>
     </h-card>
   </div>
 </template>

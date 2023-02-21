@@ -26,6 +26,10 @@ const initArchives = async (query: TQueryInfo) => {
 const handleChangePage = (page: number) => {
   query.page = page
   initArchives(query)
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 </script>
 

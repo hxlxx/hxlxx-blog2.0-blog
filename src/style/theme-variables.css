@@ -27,6 +27,7 @@
   --background-secondary: #fff;
   --background-third: #478cd638;
   --text-bright: #000;
+  --text-dark: #fff;
   --text-normal: #333;
   --shadow-primary: 1px 1px 10px 2px rgba(0, 0, 0, 0.1);
   --text-accent: #478bd6;
@@ -80,6 +81,7 @@
   --background-secondary: #212121;
   --background-third: #2c2c2c;
   --text-bright: #fff;
+  --text-dark: #000;
   --text-normal: #bebebe;
   --shadow-primary: 1px 1px 10px 2px rgba(255, 255, 255, 0.1);
   --text-accent: #fcb955;

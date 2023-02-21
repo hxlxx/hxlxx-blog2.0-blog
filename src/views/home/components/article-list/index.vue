@@ -13,17 +13,18 @@ const query = reactive<TQueryInfo>({
   limit: 9,
   category_id: undefined
 })
+const categoryBarRef = ref<HTMLElement>()
 
 onBeforeMount(() => {
   initCategoryAndCount()
-  initArticleList(query)
+  initArticleList()
 })
 
 const initCategoryAndCount = async () => {
   const { data } = (await getCategoryAndCount()) || {}
   categoryAndCount.value = data
 }
-const initArticleList = async (query: TQueryInfo) => {
+const initArticleList = async () => {
   query.skip = (query.page! - 1) * query.limit!
   const { data } = (await getArticleList(query)) || {}
   articles.value = data.res
@@ -39,12 +40,17 @@ const handleChangeTag = (id?: number) => {
   currentId.value = id ? id : undefined
   query.category_id = currentId.value
   query.page = 1
-  initArticleList(query)
+  initArticleList()
 }
 // 切换分页
 const handleChangePage = (page: number) => {
   query.page = page
-  initArticleList(query)
+  initArticleList()
+  const offsetY = categoryBarRef.value?.offsetTop
+  window.scrollTo({
+    top: offsetY! - 128,
+    behavior: 'smooth'
+  })
 }
 </script>
 
@@ -52,6 +58,7 @@ const handleChangePage = (page: number) => {
   <div>
     <div class="mb-10">
       <ul
+        ref="categoryBarRef"
         class="relative flex gap-5 flex-wrap pl-5 pr-12 py-4 rounded-xl text-sm text-normal overflow-hidden bg-secondary shadow-primary"
         :style="{
           height: categoryBarHeight

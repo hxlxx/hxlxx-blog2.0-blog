@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppHeader from './components/app-header/index.vue'
 import AppFooter from './components/app-footer/index.vue'
+import TopBar from './components/top-bar/index.vue'
 import { getWebSiteProfile } from '@/api'
 import { useSiteProfile } from '@/stores'
 
@@ -44,4 +45,5 @@ const initWebsiteProfile = async () => {
   </div>
   <!-- 页脚 -->
   <app-footer :beian-number="beianNumber" />
+  <top-bar />
 </template>

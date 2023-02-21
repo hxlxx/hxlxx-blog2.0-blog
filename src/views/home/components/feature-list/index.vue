@@ -17,7 +17,7 @@ const initFeatureArticles = async () => {
 
 <template>
   <div class="w-full flex gap-5 my-[60px]">
-    <ul class="w-full flex flex-col lg:flex-row gap-5">
+    <ul class="w-full flex flex-col lg:flex-row gap-10 lg:gap-5">
       <li
         class="w-full lg:w-[20%] h-44 lg:h-96 p-1 rounded-xl bg-gradient-to-br from-[var(--theme-bg-color-one)] to-[var(--theme-bg-color-two)]"
       >

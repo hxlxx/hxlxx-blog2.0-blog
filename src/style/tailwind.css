@@ -39,6 +39,10 @@
     font-family: Shu Hei;
     color: var(--text-bright);
   }
+  .text-dark {
+    font-family: Shu Hei;
+    color: var(--text-dark);
+  }
   .text-accent {
     color: var(--text-accent);
   }

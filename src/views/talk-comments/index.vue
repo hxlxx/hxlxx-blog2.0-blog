@@ -88,13 +88,10 @@ const handleLoadMore = () => {
         </h1>
       </template>
       <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
-      <div
-        v-if="hasMore"
-        class="cursor-pointer text-center mt-5"
-        @click="handleLoadMore"
-      >
+      <div v-if="hasMore" class="text-center mt-5">
         <span
-          class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+          class="inline-block p-3 rounded-md cursor-pointer text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+          @click="handleLoadMore"
         >
           {{ $t('button.loadMore') }}
         </span>
