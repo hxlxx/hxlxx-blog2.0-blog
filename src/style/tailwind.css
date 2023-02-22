@@ -52,6 +52,9 @@
   .shadow-primary {
     box-shadow: var(--shadow-primary);
   }
+  .shadow-middle {
+    box-shadow: var(--shadow-middle);
+  }
   .text-cutoff-1 {
     display: -webkit-box;
     word-break: break-all;

@@ -180,7 +180,10 @@ const handleSubmit = async () => {
 .field {
   @apply flex items-center gap-5;
   .field-input {
-    @apply w-full bg-primary px-2 py-1 rounded-md outline-[var(--text-accent)];
+    @apply w-full bg-primary px-2 py-1 rounded-md outline-none;
+  }
+  .field-input:focus {
+    @apply outline-2 outline outline-[var(--text-accent)];
   }
 }
 </style>

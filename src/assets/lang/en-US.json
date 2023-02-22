@@ -46,9 +46,6 @@
     "pinned": "PINNED",
     "featured": "FEATURED"
   },
-  "all": "ALL",
-  "clickToChange": "Click to change",
-  "featureArticles": "FEATURE ARTICLES",
   "profile": {
     "articles": "Articles",
     "talks": "Talks",
@@ -91,6 +88,12 @@
     "apply": "Apply"
   },
   "placeholder": {
-    "comment": "Add comment here..."
-  }
+    "comment": "Add comment here...",
+    "enterKeyword": "Please enter a keyword..."
+  },
+  "all": "ALL",
+  "clickToChange": "Click to change",
+  "featureArticles": "FEATURE ARTICLES",
+  "matchedResults": "Matched Results",
+  "searchHistory": "Search History"
 }

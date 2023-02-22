@@ -41,3 +41,8 @@ export const getArchives = (query?: TQueryInfo) => {
     `/article/archives?skip=${query?.skip || 0}&limit=${query?.limit || 0}`
   )
 }
+
+// 搜索文章
+export const searchArticle = (keyword: string) => {
+  return request.get(`/article/search?keyword=${keyword || ''}`)
+}

@@ -1,7 +1,8 @@
 export * from './website-profile'
 export * from './user'
 export * from './yiyan'
-export * from './small-nav'
+export * from './app'
+export * from './search'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 const pinia = createPinia()

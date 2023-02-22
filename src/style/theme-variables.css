@@ -1,6 +1,6 @@
 :root {
-  --theme-bg-color-one: #fcb955;
-  --theme-bg-color-two: #478bd6;
+  --theme-bg-color-one: rgb(252, 185, 85);
+  --theme-bg-color-two: rgb(71, 139, 214);
   --theme-gradient: linear-gradient(
     to right,
     var(--theme-bg-color-one),
@@ -30,6 +30,7 @@
   --text-dark: #fff;
   --text-normal: #333;
   --shadow-primary: 1px 1px 10px 2px rgba(0, 0, 0, 0.1);
+  --shadow-middle: 1px 1px 6px 5px rgba(0, 0, 0, 0.2);
   --text-accent: #478bd6;
   --article-cover-row: linear-gradient(
     90deg,
@@ -81,9 +82,10 @@
   --background-secondary: #212121;
   --background-third: #2c2c2c;
   --text-bright: #fff;
-  --text-dark: #000;
+  --text-dark: #414141;
   --text-normal: #bebebe;
   --shadow-primary: 1px 1px 10px 2px rgba(255, 255, 255, 0.1);
+  --shadow-middle: 1px 1px 6px 5px rgba(255, 255, 255, 0.2);
   --text-accent: #fcb955;
   --article-cover-row: linear-gradient(
     90deg,

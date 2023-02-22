@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSmallNav } from '@/stores'
+import { useApp } from '@/stores'
 import {
   RocketOne,
   More,
@@ -7,22 +7,25 @@ import {
   Error,
   Bookmark
 } from '@icon-park/vue-next'
+import { useThrottleFn } from '@vueuse/core'
 
-const smallNavStore = useSmallNav()
+const appStore = useApp()
 
 const topBarRef = ref<HTMLElement>()
 const ratio = ref<number>(0)
 const showMore = ref<boolean>(false)
+const showNavBar = ref<boolean>(false)
 let timer: number | undefined
 let m1 = 0
 let m2 = 0
 
+// 处理导航按钮收起和弹出
 const handleDisappear = () => {
   showMore.value = false
   const topEl = topBarRef.value!
   topEl.classList.add('disappear')
   topEl.style.right = '24px'
-  topEl.style.opacity = '0.8'
+  topEl.style.opacity = '0.6'
   topEl.style.transition = 'opacity 200ms linear'
   m1 = document.body.scrollTop
   clearTimeout(timer)
@@ -37,19 +40,33 @@ const handleDisappear = () => {
     }
   }, 600)
 }
+// 计算滚动百分比
 const handleGetPercent = () => {
   const offsetTop = window.scrollY
   const docHeight = document.body.scrollHeight
   const clientHeight = document.body.clientHeight
   ratio.value = Math.round((offsetTop / (docHeight - clientHeight)) * 100)
 }
+// 响应式处理
+const handleResize = () => {
+  const width = document.body.offsetWidth
+  if (width <= 1024) {
+    showNavBar.value = true
+  } else {
+    showNavBar.value = false
+    appStore.showSmallNav = false
+  }
+}
+const throttledResize = useThrottleFn(handleResize, 100)
 onMounted(() => {
   document.addEventListener('scroll', handleDisappear)
   document.addEventListener('scroll', handleGetPercent)
+  window.addEventListener('resize', throttledResize)
 })
 onBeforeUnmount(() => {
   document.removeEventListener('scroll', handleDisappear)
   document.removeEventListener('scroll', handleGetPercent)
+  window.removeEventListener('resize', throttledResize)
 })
 
 const handleToTop = () => {
@@ -60,18 +77,15 @@ const handleToTop = () => {
 }
 
 const handleOpenSmallNav = () => {
-  smallNavStore.showSmallNav = !smallNavStore.showSmallNav
+  appStore.showSmallNav = !appStore.showSmallNav
   showMore.value = false
 }
 </script>
 
 <template>
   <teleport to="body">
-    <div
-      ref="topBarRef"
-      class="fixed bottom-6 right-6 z-50 opacity-80 text-dark"
-    >
-      <div class="bar-container bg-primary shadow-primary z-30">
+    <div ref="topBarRef" class="fixed bottom-6 right-6 z-40 text-dark">
+      <div class="bar-container bg-[var(--text-dark)] shadow-primary">
         <div class="bar-content" @click="showMore = !showMore">
           <template v-if="!showMore">
             <span v-if="ratio > 0" class="text-[14px]">
@@ -87,7 +101,7 @@ const handleOpenSmallNav = () => {
       <transition name="bounce-y">
         <div
           v-if="ratio >= 10"
-          class="bar-container absolute -top-16 left-0 bg-secondary shadow-primary z-20"
+          class="bar-container absolute -top-16 left-0 bg-[var(--text-dark)] shadow-primary z-20"
         >
           <div class="bar-content" @click="handleToTop">
             <rocket-one size="32px" :stroke-width="3" />
@@ -97,7 +111,7 @@ const handleOpenSmallNav = () => {
       <transition name="bounce-x">
         <div
           v-show="showMore"
-          class="bar-container absolute top-0 -left-16 bg-secondary shadow-primary z-10"
+          class="bar-container absolute top-0 -left-16 bg-[var(--text-dark)] shadow-primary z-10"
         >
           <div class="bar-content" @click="$router.push('/')">
             <FerrisWheel size="24px" :stroke-width="3" />
@@ -106,8 +120,8 @@ const handleOpenSmallNav = () => {
       </transition>
       <transition name="bounce-bias">
         <div
-          v-show="showMore"
-          class="bar-container block sm:hidden absolute -top-16 -left-16 bg-secondary shadow-primary z-10"
+          v-show="showNavBar && showMore"
+          class="bar-container block absolute -top-16 -left-16 bg-[var(--text-dark)] shadow-primary z-10"
         >
           <div class="bar-content" @click="handleOpenSmallNav">
             <Bookmark size="24px" :stroke-width="3" />
