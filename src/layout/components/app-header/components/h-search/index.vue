@@ -53,7 +53,7 @@ const keywordsHightLight = (
   const firstIndex = content.indexOf(keyword)
   // 是否截取
   if (type && firstIndex >= 6) {
-    content = '...' + content.slice(firstIndex - 3)
+    content = '...' + content.slice(firstIndex - 3, 50)
   }
   let res = content.replace(reg, (match: string) => {
     return `<span class="text-[var(--text-accent)] family-shuhei">${match}</span>`
@@ -108,7 +108,7 @@ const handleRemoveHistory = (id: number) => {
           />
           <input
             type="text"
-            class="search-input"
+            class="search-input bg-primary"
             :placeholder="$t('placeholder.enterKeyword')"
             v-model="keyword"
             @input="throttledInput"
@@ -151,7 +151,7 @@ const handleRemoveHistory = (id: number) => {
   }
 }
 .search-input {
-  @apply w-full pl-12 pr-3 py-2 text-[18px] border-0 outline-none rounded-md bg-primary;
+  @apply w-full pl-12 pr-3 py-2 text-[18px] border-0 outline-none rounded-md;
 }
 .search-input:focus {
   @apply outline-2 outline outline-[var(--text-accent)];

@@ -95,5 +95,6 @@
   "clickToChange": "换一换",
   "featureArticles": "推荐文章",
   "matchedResults": "匹配结果",
-  "searchHistory": "搜索历史"
+  "searchHistory": "搜索历史",
+  "pageNotFound": "页面不见了..."
 }

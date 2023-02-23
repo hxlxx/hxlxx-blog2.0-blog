@@ -50,5 +50,14 @@ export const routes: RouteRecordRaw[] = [
     path: '/links',
     name: 'links',
     component: () => import('@/views/links/index.vue')
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404/index.vue')
+  },
+  {
+    path: '/:catchError(.*)*',
+    redirect: '/404'
   }
 ]

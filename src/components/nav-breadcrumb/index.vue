@@ -13,7 +13,7 @@ import { Right } from '@icon-park/vue-next'
       </span>
     </div>
     <h1
-      class="text-[32px] lg:text-[64px] text-white text-shadow-primary uppercase transition-200"
+      class="text-[32px] lg:text-[64px] text-white text-shadow-primary uppercase transition-200 family-shuhei"
     >
       {{ $t(`nav.${$route.name as string}`) }}
     </h1>
