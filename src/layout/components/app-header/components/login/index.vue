@@ -196,6 +196,7 @@ const handleSignUpOrResetPwd = async () => {
 
 <template>
   <div
+    v-stopScroll
     v-if="modelValue"
     id="dialog-container"
     class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-[rgba(0,0,0,0.2)] z-30"

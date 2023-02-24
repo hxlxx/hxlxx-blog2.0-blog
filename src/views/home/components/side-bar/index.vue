@@ -47,9 +47,9 @@ onBeforeMount(() => {
   initRecentlyComment()
 })
 onMounted(() => {
-  const createdAt =
-    profile.websiteConfig?.webSite_created_at?.getTime() ||
-    new Date('2023-01-01')?.getTime()
+  const createdAt = new Date(
+    profile.websiteConfig?.webSite_created_at || '2023-01-01'
+  ).getTime()
   timer.value = setInterval(() => {
     const now = new Date().getTime()
     timeOffset.value = now - createdAt

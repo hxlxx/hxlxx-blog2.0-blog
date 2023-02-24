@@ -27,17 +27,6 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', handleCloseSearch)
 })
 
-watch(
-  () => appStore.showSearch,
-  (newVal) => {
-    if (newVal) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'overlay'
-    }
-  }
-)
-
 // 重置搜索结果
 const resetSearch = () => {
   results.value = results.value = searchStore.results
@@ -96,6 +85,7 @@ const handleRemoveHistory = (id: number) => {
 <template>
   <transition name="appear">
     <div
+      v-stopScroll
       v-if="appStore.showSearch"
       ref="searchRef"
       class="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.2)] z-50"

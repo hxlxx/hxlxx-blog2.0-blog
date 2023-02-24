@@ -39,6 +39,7 @@ const handleClickNav = (path: string) => {
 <template>
   <transition name="appear">
     <div
+      v-stopScroll
       v-if="appStore.showSmallNav"
       ref="smallNavRef"
       class="fixed top-0 left-0 flex lg:hidden items-center justify-center w-full h-full bg-[rgba(0,0,0,0.2)] z-50"

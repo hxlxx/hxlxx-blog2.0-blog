@@ -10,6 +10,7 @@ import {
 import { useThrottleFn } from '@vueuse/core'
 
 const appStore = useApp()
+const router = useRouter()
 
 const topBarRef = ref<HTMLElement>()
 const ratio = ref<number>(0)
@@ -34,7 +35,7 @@ const handleDisappear = () => {
     if (m1 === m2) {
       topEl.classList.remove('disappear')
       topEl.classList.add('appear')
-      topEl.style.right = '-8px'
+      topEl.style.right = '-20px'
       topEl.style.transition = 'opacity 200ms linear 500ms'
       topEl.style.opacity = '1'
     }
@@ -75,7 +76,10 @@ const handleToTop = () => {
     behavior: 'smooth'
   })
 }
-
+const handleToHome = () => {
+  router.push('/')
+  showMore.value = false
+}
 const handleOpenSmallNav = () => {
   appStore.showSmallNav = !appStore.showSmallNav
   showMore.value = false
@@ -113,7 +117,7 @@ const handleOpenSmallNav = () => {
           v-show="showMore"
           class="bar-container absolute top-0 -left-16 bg-[var(--text-dark)] shadow-primary z-10"
         >
-          <div class="bar-content" @click="$router.push('/')">
+          <div class="bar-content" @click="handleToHome">
             <FerrisWheel size="24px" :stroke-width="3" />
           </div>
         </div>
@@ -158,7 +162,7 @@ const handleOpenSmallNav = () => {
     transform: translateX(56px);
   }
   100% {
-    transform: translateX(32px);
+    transform: translateX(44px);
   }
 }
 

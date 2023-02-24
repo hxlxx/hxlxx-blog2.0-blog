@@ -15,5 +15,13 @@ export default {
         }
       })
     })
+    app.directive('stopScroll', {
+      mounted(el, binding) {
+        document.body.style.overflow = 'hidden'
+      },
+      beforeUnmount(el, binding) {
+        document.body.style.overflow = 'overlay'
+      }
+    })
   }
 }
