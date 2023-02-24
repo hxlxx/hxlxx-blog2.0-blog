@@ -70,22 +70,27 @@ const handleLoadMore = () => {
   <div>
     <nav-breadcrumb />
     <div class="flex gap-5">
-      <h-card class="flex-1 px-20 py-10">
-        <template #header>
-          <h1 class="py-2 text-[32px] text-bright">
-            {{ $t('title.comments') }}
-          </h1>
-        </template>
-        <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
-        <div v-if="hasMore" class="text-center mt-5">
-          <span
-            class="inline-block p-3 rounded-md cursor-pointer text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
-            @click="handleLoadMore"
-          >
-            {{ $t('button.loadMore') }}
-          </span>
+      <div class="flex-1">
+        <div class="card p-10 mb-10 text-[20px] family-shuhei">
+          {{ $t('placeholder.saySomething') }}
         </div>
-      </h-card>
+        <h-card class="p-10">
+          <template #header>
+            <h1 class="py-2 text-[32px] text-bright">
+              {{ $t('title.comments') }}
+            </h1>
+          </template>
+          <h-comment :comments="commentList" @on-submit="handleSubmitComment" />
+          <div v-if="hasMore" class="text-center mt-5">
+            <span
+              class="inline-block p-3 rounded-md cursor-pointer text-white text-shadow-primary family-shuhei theme-gradient transition-200 hover:opacity-60 shadow-primary"
+              @click="handleLoadMore"
+            >
+              {{ $t('button.loadMore') }}
+            </span>
+          </div>
+        </h-card>
+      </div>
       <div class="hidden lg:block w-[324px]">
         <profile-card :profile="profile" />
       </div>

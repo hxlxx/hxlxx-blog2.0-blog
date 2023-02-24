@@ -89,12 +89,29 @@
   },
   "placeholder": {
     "comment": "Add comment here...",
-    "enterKeyword": "Please enter a keyword..."
+    "enterKeyword": "Please enter a keyword...",
+    "saySomething": "To say something here...",
+    "noFriendsYet": "No friends have been added yet...",
+    "noTalks": "There's no more to say...",
+    "noArticles": "There's no more articles...",
+    "noTags": "There's no more tags...",
+    "noComments": "There's no more comments...",
+    "noNotice": "There's not a notice..."
+  },
+  "date": {
+    "year": "y",
+    "month": "m",
+    "day": "d",
+    "hour": "h",
+    "minute": "min",
+    "second": "sec"
   },
   "all": "ALL",
   "clickToChange": "Click to change",
   "featureArticles": "FEATURE ARTICLES",
   "matchedResults": "Matched Results",
   "searchHistory": "Search History",
-  "pageNotFound": "Page Not Found"
+  "pageNotFound": "Page Not Found",
+  "viewTimes": "View Times",
+  "runningTime": "Running Time"
 }

@@ -3,7 +3,7 @@ import { getTagAndCount } from '@/api'
 import type { TTagAndCount } from '@/types'
 
 const router = useRouter()
-const tagAndCount = ref<TTagAndCount[]>()
+const tagAndCount = ref<TTagAndCount[]>([])
 
 onBeforeMount(() => {
   initTagAndCount()
@@ -19,7 +19,7 @@ const initTagAndCount = async () => {
   <div>
     <nav-breadcrumb />
     <div class="card p-10">
-      <ul class="flex flex-wrap gap-5">
+      <ul v-if="tagAndCount.length" class="flex flex-wrap gap-5">
         <li
           v-for="tag in tagAndCount"
           :key="tag.id"
@@ -28,6 +28,11 @@ const initTagAndCount = async () => {
           <h-tag class="text-[20px]" :text="tag.tag_name" :count="tag.count" />
         </li>
       </ul>
+      <div v-else class="text-[20px] family-shuhei">
+        <span>
+          {{ $t('placeholder.noTags') }}
+        </span>
+      </div>
     </div>
   </div>
 </template>

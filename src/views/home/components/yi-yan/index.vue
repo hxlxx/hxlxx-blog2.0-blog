@@ -32,7 +32,7 @@ const throttledFn = useThrottleFn(() => {
 
 <template>
   <div class="relative mb-[60px] bg-transparent text-primary z-10">
-    <div class="paragraph">
+    <div class="paragraph family-shuhei transition-200">
       <h1 class="break-all">{{ creator }}:</h1>
       <p>{{ hitokoto }}</p>
       <Refresh
@@ -46,7 +46,7 @@ const throttledFn = useThrottleFn(() => {
 
 <style lang="postcss" scoped>
 .paragraph {
-  @apply flex gap-3 justify-center items-center text-[20px] h-[60px] md:text-[40px] text-white family-shuhei transition-200;
+  @apply flex gap-3 justify-center items-center text-[20px] h-[60px] md:text-[40px] text-white;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5), -1px -1px 1px #fff;
 }
 </style>

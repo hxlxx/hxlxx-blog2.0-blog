@@ -163,11 +163,6 @@ const handleOpenDialog = () => {
   top: 0;
   left: 0;
   width: 100%;
-  /* background: linear-gradient(
-    to right,
-    var(--theme-bg-color-one),
-    var(--theme-bg-color-two)
-  ); */
   -webkit-clip-path: polygon(
     100% 0,
     0 0,

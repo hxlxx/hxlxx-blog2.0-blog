@@ -5,9 +5,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "lib": ["es2017", "ES6", "DOM"]
   },
-
   "references": [
     {
       "path": "./tsconfig.config.json"

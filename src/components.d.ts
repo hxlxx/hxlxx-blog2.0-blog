@@ -18,7 +18,6 @@ declare module '@vue/runtime-core' {
     HMessageBox: typeof import('./components/h-message-box/index.vue')['default']
     HPagination: typeof import('./components/h-pagination/index.vue')['default']
     HTag: typeof import('./components/h-tag/index.vue')['default']
-    Login: typeof import('./components/login/index.vue')['default']
     NavBreadcrumb: typeof import('./components/nav-breadcrumb/index.vue')['default']
     ProfileCard: typeof import('./components/profile-card/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

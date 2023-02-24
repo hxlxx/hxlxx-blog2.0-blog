@@ -44,7 +44,7 @@ const handleChangePage = (index: number) => {
     <ul class="flex justify-center gap-5 text-normal">
       <li
         v-if="current > 1"
-        class="text-bright page-bar"
+        class="text-bright page-bar transition-100"
         @click="emits('onChangePage', --current)"
       >
         <left-one class="text-accent" :stroke-width="6" size="20px" />
@@ -101,6 +101,6 @@ ul > li {
   @apply flex items-center;
 }
 .page-bar {
-  @apply cursor-pointer hover:opacity-50 transition-100;
+  @apply cursor-pointer hover:opacity-50;
 }
 </style>

@@ -70,30 +70,41 @@ const handleSubmit = async () => {
         <div
           class="card p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
-          <div
-            v-for="link in linkList"
-            :key="link.id"
-            class="flex items-center gap-5 p-5 bg-primary rounded-xl transition-200 hover:shadow-primary"
-          >
+          <template v-if="linkList.length">
             <div
-              class="shrink-0 w-20 h-20 rounded-full overflow-hidden transition-300 hover:shadow-primary hover:rotate-[360deg]"
+              v-for="link in linkList"
+              :key="link.id"
+              class="flex items-center gap-5 p-5 bg-primary rounded-xl transition-200 hover:shadow-primary"
             >
-              <img class="w-full h-full object-cover" :src="link.link_avatar" />
-            </div>
-            <div>
-              <a
-                :href="link.link_url"
-                class="text-bright text-[20px]"
-                target="_blank"
+              <div
+                class="shrink-0 w-20 h-20 rounded-full overflow-hidden transition-300 hover:shadow-primary hover:rotate-[360deg]"
               >
-                {{ link.link_name }}
-              </a>
-              <p class="mt-1 text-cutoff-1">
-                {{ link.link_intro }}
-              </p>
+                <img
+                  class="w-full h-full object-cover"
+                  :src="link.link_avatar"
+                />
+              </div>
+              <div>
+                <a
+                  :href="link.link_url"
+                  class="text-bright text-[20px]"
+                  target="_blank"
+                >
+                  {{ link.link_name }}
+                </a>
+                <p class="mt-1 text-cutoff-1">
+                  {{ link.link_intro }}
+                </p>
+              </div>
             </div>
+          </template>
+          <div v-else>
+            <span class="text-[20px] family-shuhei">
+              {{ $t('placeholder.noFriendsYet') }}
+            </span>
           </div>
         </div>
+        <!-- 交换友链表单 -->
         <h-card class="p-10 mt-10">
           <template #header>
             <h1 class="py-2 text-bright text-[32px]">
@@ -109,7 +120,7 @@ const handleSubmit = async () => {
                 {{ $t('form.linkName') }}
               </label>
               <input
-                class="field-input"
+                class="field-input bg-primary"
                 id="name"
                 type="text"
                 autocomplete="off"
@@ -124,7 +135,7 @@ const handleSubmit = async () => {
                 {{ $t('form.linkAvatar') }}
               </label>
               <input
-                class="field-input"
+                class="field-input bg-primary"
                 id="avatar"
                 type="text"
                 autocomplete="off"
@@ -139,7 +150,7 @@ const handleSubmit = async () => {
                 {{ $t('form.linkUrl') }}
               </label>
               <input
-                class="field-input"
+                class="field-input bg-primary"
                 id="link"
                 type="text"
                 autocomplete="off"
@@ -154,7 +165,7 @@ const handleSubmit = async () => {
                 {{ $t('form.linkIntroduce') }}
               </label>
               <input
-                class="field-input"
+                class="field-input bg-primary"
                 id="introduce"
                 type="text"
                 autocomplete="off"
@@ -180,7 +191,7 @@ const handleSubmit = async () => {
 .field {
   @apply flex items-center gap-5;
   .field-input {
-    @apply w-full bg-primary px-2 py-1 rounded-md outline-none;
+    @apply w-full px-2 py-1 rounded-md outline-none;
   }
   .field-input:focus {
     @apply outline-2 outline outline-[var(--text-accent)];

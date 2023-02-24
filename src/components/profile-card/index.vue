@@ -10,7 +10,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="profile-card relative text-normal">
+  <div class="profile-card text-normal hover:shadow-primary">
     <div class="w-full h-full rounded-xl bg-primary opacity-90">
       <div
         class="absolute top-0 left-0 flex flex-col justify-around w-full h-full px-3"
@@ -73,7 +73,7 @@ defineProps<Props>()
 
 <style lang="postcss" scoped>
 .profile-card {
-  @apply w-full h-98 px-1 pt-12 pb-1 rounded-xl hover:shadow-primary;
+  @apply relative w-full h-98 px-1 pt-12 pb-1 rounded-xl;
   background-image: var(--theme-gradient);
   transition: var(--transition-200);
 }

@@ -89,12 +89,29 @@
   },
   "placeholder": {
     "comment": "请输入评论内容",
-    "enterKeyword": "请输入搜索内容"
+    "enterKeyword": "请输入搜索内容",
+    "saySomething": "说点什么吧...",
+    "noFriendsYet": "暂时还没有添加朋友哦...",
+    "noTalks": "暂时还没有更多说说哦...",
+    "noArticles": "暂时还没有文章哦...",
+    "noTags": "暂时还没有添加标签哦...",
+    "noComments": "暂时还没有评论哦...",
+    "noNotice": "暂时还没有添加公告哦..."
+  },
+  "date": {
+    "year": "年",
+    "month": "月",
+    "day": "日",
+    "hour": "时",
+    "minute": "分",
+    "second": "秒"
   },
   "all": "全部",
   "clickToChange": "换一换",
   "featureArticles": "推荐文章",
   "matchedResults": "匹配结果",
   "searchHistory": "搜索历史",
-  "pageNotFound": "页面不见了..."
+  "pageNotFound": "页面不见了...",
+  "viewTimes": "访问次数",
+  "runningTime": "运行时间"
 }

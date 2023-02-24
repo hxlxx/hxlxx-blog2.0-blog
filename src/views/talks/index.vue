@@ -37,17 +37,24 @@ const handleLoadMore = () => {
   <div>
     <nav-breadcrumb />
     <div class="flex gap-5">
-      <div class="flex flex-1 flex-col gap-5">
-        <talk-item v-for="talk in talkList" :key="talk.id" :talk="talk" />
-        <div
-          v-if="hasMore"
-          class="cursor-pointer text-center mt-5"
-          @click="handleLoadMore"
-        >
-          <span
-            class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-300 hover:opacity-60 shadow-primary"
+      <div class="flex-1">
+        <div v-if="talkList.length" class="flex flex-col gap-5">
+          <talk-item v-for="talk in talkList" :key="talk.id" :talk="talk" />
+          <div
+            v-if="hasMore"
+            class="cursor-pointer text-center mt-5"
+            @click="handleLoadMore"
           >
-            {{ $t('button.loadMore') }}
+            <span
+              class="inline-block p-3 rounded-md text-white text-shadow-primary family-shuhei theme-gradient transition-300 hover:opacity-60 shadow-primary"
+            >
+              {{ $t('button.loadMore') }}
+            </span>
+          </div>
+        </div>
+        <div v-else class="card p-10">
+          <span class="text-[20px] family-shuhei">
+            {{ $t('placeholder.noTalks') }}
           </span>
         </div>
       </div>

@@ -3,7 +3,15 @@ import { createComment, getArticleDetail, getCommentList } from '@/api'
 import { useSiteProfile, useUser } from '@/stores'
 import type { TArticle, TWebsiteProfile, TComment, TQueryInfo } from '@/types'
 import { useDateFormat } from '@vueuse/core'
-import { RocketOne, LeftC, MessageEmoji, Back, Next } from '@icon-park/vue-next'
+import {
+  RocketOne,
+  LeftC,
+  MessageEmoji,
+  Back,
+  Next,
+  Text,
+  StopwatchStart
+} from '@icon-park/vue-next'
 import MdEditor from 'md-editor-v3'
 import * as tocbot from 'tocbot'
 import hMessage from '@/components/h-message'
@@ -140,8 +148,8 @@ const handleLoadMore = () => {
 
 <template>
   <div>
-    <div class="text-white text-shadow-primary">
-      <div class="flex gap-3 text-sm">
+    <div class="text-white">
+      <div class="flex gap-3 text-sm text-shadow-primary">
         <b>{{ article.category?.category_name }}</b>
         <ul class="flex gap-3">
           <li v-for="tag in article.tags" :key="tag.id">
@@ -149,7 +157,7 @@ const handleLoadMore = () => {
           </li>
         </ul>
       </div>
-      <h1 class="text-[32px] lg:text-[64px] transition-200">
+      <h1 class="text-[32px] lg:text-[64px] transition-200 text-shadow-primary">
         {{ article.title }}
       </h1>
       <div class="flex gap-3 items-center">
@@ -161,10 +169,16 @@ const handleLoadMore = () => {
           <span>
             <em>{{ useDateFormat(article.created_at, 'MMM, d, YYYY') }}</em>
           </span>
-          <span class="hidden md:inline">
-            {{ (article.content.length / 1000).toFixed(1) + 'K' }}
+          <span class="hidden md:inline-flex md:items-center md:gap-1 ml-2">
+            <Text />
+            <span>
+              {{ (article.content.length / 1000).toFixed(1) + 'K' }}
+            </span>
           </span>
-          <span class="hidden md:inline">time-1min</span>
+          <span class="hidden md:inline-flex md:items-center md:gap-1 ml-2">
+            <stop-watch-start />
+            {{ (article.content.length / 250).toFixed(1) + 'min' }}
+          </span>
         </span>
       </div>
     </div>
@@ -187,7 +201,7 @@ const handleLoadMore = () => {
           <div class="grid gap-5 grid-cols-1 lg:grid-cols-2">
             <div>
               <div class="text-center lg:text-left">
-                <span class="relation">
+                <span class="relation text-bright">
                   <Back fill="var(--text-accent)" :stroke-width="5" />
                   previous
                   <span
@@ -199,7 +213,7 @@ const handleLoadMore = () => {
             </div>
             <div>
               <div class="text-center lg:text-right">
-                <span class="relation">
+                <span class="relation text-bright">
                   next
                   <Next fill="var(--text-accent)" :stroke-width="5" />
                   <span
@@ -243,13 +257,22 @@ const handleLoadMore = () => {
             <div id="tocbot"></div>
           </div>
           <div class="card flex justify-center items-center gap-12 p-5">
-            <div class="action-bar" @click="router.go(-1)">
+            <div
+              class="action-bar transition-100 text-bright hover:text-accent"
+              @click="router.go(-1)"
+            >
               <left-c size="32px" />
             </div>
-            <div class="action-bar" @click="handleToTop">
+            <div
+              class="action-bar transition-100 text-bright hover:text-accent"
+              @click="handleToTop"
+            >
               <rocket-one size="32px" />
             </div>
-            <div class="action-bar" @click="handleToComments">
+            <div
+              class="action-bar transition-100 text-bright hover:text-accent"
+              @click="handleToComments"
+            >
               <message-emoji size="32px" />
             </div>
           </div>
@@ -320,9 +343,9 @@ const handleLoadMore = () => {
   }
 }
 .action-bar {
-  @apply cursor-pointer transition-100 text-bright transition-200 hover:text-accent;
+  @apply cursor-pointer;
 }
 .relation {
-  @apply relative inline-flex items-center gap-2 pb-3 mb-10 text-bright text-[24px];
+  @apply relative inline-flex items-center gap-2 pb-3 mb-10 text-[24px];
 }
 </style>

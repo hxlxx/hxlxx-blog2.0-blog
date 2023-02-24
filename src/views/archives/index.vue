@@ -5,7 +5,7 @@ import { useDateFormat } from '@vueuse/core'
 
 const router = useRouter()
 
-const archives = ref<TArchive[]>()
+const archives = ref<TArchive[]>([])
 const query = reactive<TQueryInfo>({
   page: 1,
   skip: 0,
@@ -36,7 +36,7 @@ const handleChangePage = (page: number) => {
 <template>
   <div>
     <nav-breadcrumb />
-    <div class="card pb-20">
+    <div v-if="archives.length" class="card pb-20">
       <div class="mb-10" v-for="archive in archives" :key="archive.timeLine">
         <h1 class="my-10 text-accent text-[48px] text-center family-shuhei">
           {{ archive.timeLine }}
@@ -82,6 +82,11 @@ const handleChangePage = (page: number) => {
         :size="query.limit"
         @on-change-page="handleChangePage"
       />
+    </div>
+    <div v-else class="card p-10 text-[20px] family-shuhei">
+      <span>
+        {{ $t('placeholder.noArticles') }}
+      </span>
     </div>
   </div>
 </template>

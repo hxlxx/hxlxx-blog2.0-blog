@@ -17,6 +17,7 @@ const content = ref<string>('')
 const faceList = emoji.faceList
 const emojiList = emoji.emojiList[0]
 const tvList = emoji.emojiList[1]
+// const emojiEntries = Object.keys(emoji)
 
 const handleClick = (e: Event) => {
   if (
@@ -83,10 +84,10 @@ const handleSubmitComment = () => {
           v-show="emojiBoxVisible"
           ref="emojiRef"
           id="emoji"
-          class="emoji"
+          class="emoji shadow-primary"
           @click.stop
         >
-          <span class="emoji-arrow"></span>
+          <span class="emoji-arrow bg-secondary shadow-primary"></span>
           <div class="relative pt-3 rounded-xl bg-secondary">
             <div class="flex justify-around mb-1">
               <div class="cursor-pointer" @click="emojiOrTv = true">
@@ -99,14 +100,16 @@ const handleSubmitComment = () => {
             <ul class="flex flex-wrap gap-1 p-2">
               <li
                 class="cursor-pointer"
-                v-for="emoji in Object.entries(emojiOrTv ? emojiList : tvList)"
-                :key="emoji[0]"
-                @click="handleSelectEmoji(emoji[0])"
+                v-for="[emojiKey, emojiValue] in Object.entries(
+                  emojiOrTv ? emojiList : tvList
+                )"
+                :key="emojiKey"
+                @click="handleSelectEmoji(emojiKey)"
               >
                 <img
-                  :src="(emoji[1] as string)"
-                  :title="(emoji[0] as string)"
-                  :alt="(emoji[0] as string)"
+                  :src="(emojiValue as string)"
+                  :title="(emojiKey as string)"
+                  :alt="(emojiKey as string)"
                 />
               </li>
             </ul>
@@ -122,9 +125,9 @@ const handleSubmitComment = () => {
 
 <style lang="postcss" scoped>
 .emoji {
-  @apply absolute top-[50px] -left-1/2 w-[180px] h-[290px] shadow-primary rounded-xl;
+  @apply absolute top-[50px] -left-1/2 w-[180px] h-[290px] rounded-xl;
   .emoji-arrow {
-    @apply inline-block w-3 h-3 absolute -top-1 left-1/2 -translate-x-1/2 rotate-45 bg-secondary shadow-primary;
+    @apply inline-block w-3 h-3 absolute -top-1 left-1/2 -translate-x-1/2 rotate-45;
   }
   img {
     @apply w-5 h-5;

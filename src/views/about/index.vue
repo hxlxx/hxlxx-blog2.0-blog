@@ -6,7 +6,7 @@ import MdEditor from 'md-editor-v3'
 
 const profileStore = useSiteProfile()
 
-const content = ref<string>('## 123')
+const content = ref<string>('# Hello World!!!')
 const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 
 onBeforeMount(() => {
