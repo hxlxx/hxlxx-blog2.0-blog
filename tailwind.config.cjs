@@ -7,6 +7,7 @@ module.exports = {
         98: '28rem'
       },
       screens: {
+        'sc-375': '375px',
         'sc-800': '800px',
         'sc-900': '900px',
         'sc-1260': '1260px'

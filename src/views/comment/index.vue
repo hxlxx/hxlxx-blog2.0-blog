@@ -74,9 +74,9 @@ const handleLoadMore = () => {
         <div class="card p-10 mb-10 text-[20px] family-shuhei">
           {{ $t('placeholder.saySomething') }}
         </div>
-        <h-card class="p-10">
+        <h-card class="px-2 py-1 md:p-10">
           <template #header>
-            <h1 class="py-2 text-[32px] text-bright">
+            <h1 class="pb-2 text-[32px] text-bright">
               {{ $t('title.comments') }}
             </h1>
           </template>

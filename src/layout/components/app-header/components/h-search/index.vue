@@ -74,6 +74,10 @@ const handleInput = () => {
   }
 }
 const throttledInput = useThrottleFn(handleInput, 100)
+// 处理中文输入法
+const handleCompositionEnd = () => {
+  handleInput()
+}
 // 点击搜索结果
 const handleClickResult = (result: TResult) => {
   router.push({ name: 'article-detail', params: { id: result.id } })
@@ -115,6 +119,7 @@ const handleRemoveHistory = (id: number) => {
             :placeholder="$t('placeholder.enterKeyword')"
             v-model="keyword"
             @input="throttledInput"
+            @compositionend="handleCompositionEnd"
           />
         </div>
         <div
@@ -165,7 +170,8 @@ const handleRemoveHistory = (id: number) => {
   @apply outline-2 outline outline-[var(--text-accent)];
 }
 .results {
-  @apply flex flex-col items-center gap-5 p-2 max-h-[480px] rounded-md overflow-y-auto;
+  @apply flex flex-col items-center gap-5 p-2 max-h-[480px] rounded-md;
+  overflow-y: overlay;
   &::-webkit-scrollbar {
     width: 6px;
     background-color: #eee;

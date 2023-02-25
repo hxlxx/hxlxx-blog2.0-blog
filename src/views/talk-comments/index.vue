@@ -81,7 +81,7 @@ const handleLoadMore = () => {
 <template>
   <div>
     <talk-item :talk="talk" />
-    <h-card class="px-10 py-5 mt-10">
+    <h-card class="px-2 py-1 md:p-10 mt-10">
       <template #header>
         <h1 class="pt-2 text-[32px] text-bright">
           {{ $t('title.comments') }}

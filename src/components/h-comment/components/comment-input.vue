@@ -97,7 +97,7 @@ const handleSubmitComment = () => {
                 <img :src="faceList[1]" />
               </div>
             </div>
-            <ul class="flex flex-wrap gap-1 p-2">
+            <ul class="emojis">
               <li
                 class="cursor-pointer"
                 v-for="[emojiKey, emojiValue] in Object.entries(
@@ -125,7 +125,7 @@ const handleSubmitComment = () => {
 
 <style lang="postcss" scoped>
 .emoji {
-  @apply absolute top-[50px] -left-1/2 w-[180px] h-[290px] rounded-xl;
+  @apply absolute top-[50px] -left-1/2 w-[180px] h-[216px] rounded-xl;
   .emoji-arrow {
     @apply inline-block w-3 h-3 absolute -top-1 left-1/2 -translate-x-1/2 rotate-45;
   }
@@ -136,13 +136,29 @@ const handleSubmitComment = () => {
 .action-box {
   animation: appear 500ms linear;
 }
-
 @keyframes appear {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+.emojis {
+  @apply flex flex-wrap gap-1 p-2 max-h-[180px];
+  overflow-y: overlay;
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: #eee;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(
+      180deg,
+      var(--theme-bg-color-one),
+      var(--theme-bg-color-two)
+    );
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
   }
 }
 </style>

@@ -29,7 +29,7 @@ const handleScroll = () => {
   const down = window.scrollY - positionsMemo > 0
   positionsMemo = window.scrollY
   const el = navHeaderRef.value!
-  el.style.transition = 'all 0.1s linear'
+  el.style.transition = 'opacity 0.1s linear'
   if (down) {
     const { height } = el.getBoundingClientRect()
     el.style.opacity =
@@ -63,7 +63,6 @@ const handleOpenDialog = () => {
   <div>
     <!-- 背景 -->
     <div class="header-banner">
-      <!-- <div class="banner banner-img"></div> -->
       <div class="banner theme-gradient"></div>
     </div>
     <!-- 导航栏 -->
@@ -148,7 +147,7 @@ const handleOpenDialog = () => {
 
 <style lang="postcss" scoped>
 .nav-header {
-  @apply flex items-center w-full h-32 px-3 lg:pl-16 lg:pr-[72px] fixed top-0 left-0 text-white z-20;
+  @apply flex items-center w-full h-32 px-3 lg:pl-14 lg:pr-[64px] fixed top-0 left-0 text-white z-20;
   background: var(--theme-gradient);
 }
 .banner-img {

@@ -42,9 +42,9 @@ const handleClickNav = (path: string) => {
       v-stopScroll
       v-if="appStore.showSmallNav"
       ref="smallNavRef"
-      class="fixed top-0 left-0 flex lg:hidden items-center justify-center w-full h-full bg-[rgba(0,0,0,0.2)] z-50"
+      class="fixed top-0 left-0 lg:hidden w-full h-full bg-[rgba(0,0,0,0.2)] z-50"
     >
-      <div class="card w-[80%] p-5">
+      <div class="card max-w-[480px] mt-32 mx-auto p-5">
         <div class="flex flex-col justify-around px-3">
           <div class="flex flex-col items-center">
             <!-- 头像 -->

@@ -133,13 +133,15 @@ const handleLogin = async () => {
     const form = toRaw(loginForm) as any
     form.username = form.email
 
-    const { data } = (await login({ data: form })) || {}
-    userStore.setUser(data.user)
-    userStore.setToken(data.token)
-    hMessage({
-      type: 'success',
-      message: i18n.t('message.LoginSuccess')
-    })
+    const { data, code } = (await login({ data: form })) || {}
+    if (code === 200) {
+      userStore.setUser(data.user)
+      userStore.setToken(data.token)
+      hMessage({
+        type: 'success',
+        message: i18n.t('message.LoginSuccess')
+      })
+    }
     emits('update:modelValue', !props.modelValue)
     resetForm()
   }
@@ -199,11 +201,11 @@ const handleSignUpOrResetPwd = async () => {
     v-stopScroll
     v-if="modelValue"
     id="dialog-container"
-    class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-[rgba(0,0,0,0.2)] z-30"
+    class="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.2)] z-30"
     @click="handleCloseDialog"
   >
     <form
-      class="card w-[90%] sc-900:w-[30%] family-shuhei transition-200"
+      class="card max-w-[560px] mt-32 mx-auto family-shuhei"
       @submit.prevent
     >
       <!-- 登录表单 -->

@@ -52,7 +52,7 @@ const handleSubmitComment = (
       />
     </div>
     <!-- 评论区 -->
-    <div class="flex p-5 pb-0" v-for="comment in commentList" :key="comment.id">
+    <div class="flex mt-5" v-for="comment in commentList" :key="comment.id">
       <!-- 头像 -->
       <div>
         <div class="w-10 h-10 rounded-full overflow-hidden">
@@ -65,7 +65,9 @@ const handleSubmitComment = (
       <!-- 评论内容 -->
       <div class="w-full pl-5">
         <div>
-          <div class="flex items-center justify-between mb-5">
+          <div
+            class="flex flex-col sc-375:flex-row gap-2 sc-375:gap-0 sc-375:items-center sc-375:justify-between mb-5"
+          >
             <span class="text-bright break-all">
               {{ comment.user.username }}
             </span>
