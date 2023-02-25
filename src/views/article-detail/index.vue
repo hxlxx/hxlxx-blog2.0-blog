@@ -25,7 +25,7 @@ const profileStore = useSiteProfile()
 
 const commentRef = ref<HTMLElement>()
 const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
-const article = ref<TArticle>({ content: '' } as TArticle)
+const article = reactive<TArticle>({ content: '' } as TArticle)
 const showCatalog = ref<boolean>(true)
 const commentList = ref<TComment[]>([])
 const query = reactive<TQueryInfo>({
@@ -59,7 +59,7 @@ watch(
 
 const initArticleDetail = async (id: number) => {
   const { data } = (await getArticleDetail(id)) || {}
-  article.value = data
+  Object.assign(article, data)
 }
 const initCommentList = async (flag?: boolean) => {
   const skip = (query.page! - 1) * query.limit!
@@ -79,6 +79,7 @@ const initTocbot = () => {
     contentSelector: '.article',
     headingSelector: 'h1, h2, h3',
     hasInnerContainers: false,
+    // collapseDepth: 0,
     headingsOffset: -200, // toc-list 判断 active 的基准线，以 document 为参照
     scrollSmoothOffset: -150, // 跳转到锚点的偏移，基准点向下为负，向上为正
     onClick: (e) => {
@@ -118,7 +119,7 @@ const handleSubmitComment = async (
   const comment = {
     pid,
     uid: userStore.user.id,
-    topic_id: article.value.id,
+    topic_id: article.id,
     reply_to,
     content,
     type: 2
@@ -176,7 +177,7 @@ const handleLoadMore = () => {
             </span>
           </span>
           <span class="hidden md:inline-flex md:items-center md:gap-1 ml-2">
-            <stop-watch-start />
+            <stopwatch-start />
             {{ (article.content.length / 250).toFixed(1) + 'min' }}
           </span>
         </span>
@@ -250,7 +251,7 @@ const handleLoadMore = () => {
       <div class="hidden xl:flex flex-col gap-10 w-[324px] flex-shrink-0">
         <profile-card :profile="profile" />
         <div class="sticky top-[130px] left-0">
-          <div v-if="showCatalog" class="card p-10 pt-5 mb-10">
+          <div v-if="showCatalog" class="card p-5 mb-10">
             <h1 class="mb-2 text-bright text-[20px]">
               <b>{{ $t('title.catalog') }}</b>
             </h1>
@@ -327,15 +328,14 @@ const handleLoadMore = () => {
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--max-lines-1);
+    position: relative;
+    padding-left: 30px;
+    &::after {
+      @apply block absolute top-1/2 left-2 -translate-y-[25%] w-[6px] h-[6px] rounded-full bg-[var(--text-accent)];
+      content: '';
+    }
   }
-  .toc-list-item {
-    @apply relative;
-  }
-  .toc-list-item::before {
-    @apply block absolute top-1/2 -left-5 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-[var(--text-accent)];
-    content: '';
-  }
-  .is-active-li {
+  .is-active-link {
     color: var(--text-accent);
   }
   .toc-link::before {

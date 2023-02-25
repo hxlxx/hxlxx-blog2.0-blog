@@ -113,5 +113,6 @@
   "searchHistory": "搜索历史",
   "pageNotFound": "页面不见了...",
   "viewTimes": "访问次数",
-  "runningTime": "运行时间"
+  "runningTime": "运行时间",
+  "close": "关闭"
 }

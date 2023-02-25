@@ -20,14 +20,20 @@ let timer: number | undefined
 let m1 = 0
 let m2 = 0
 
+// 动画结束后恢复鼠标事件
+function handleResetPointerEvent(this: HTMLElement) {
+  this.style.pointerEvents = 'inherit'
+}
 // 处理导航按钮收起和弹出
 const handleDisappear = () => {
   showMore.value = false
   const topEl = topBarRef.value!
+  topEl.removeEventListener('transitionend', handleResetPointerEvent)
   topEl.classList.add('disappear')
+  topEl.style.transition = 'opacity 200ms linear'
   topEl.style.right = '24px'
   topEl.style.opacity = '0.6'
-  topEl.style.transition = 'opacity 200ms linear'
+  topEl.style.pointerEvents = 'none'
   m1 = document.body.scrollTop
   clearTimeout(timer)
   timer = setTimeout(() => {
@@ -35,9 +41,10 @@ const handleDisappear = () => {
     if (m1 === m2) {
       topEl.classList.remove('disappear')
       topEl.classList.add('appear')
-      topEl.style.right = '-20px'
       topEl.style.transition = 'opacity 200ms linear 500ms'
+      topEl.style.right = '-20px'
       topEl.style.opacity = '1'
+      topEl.addEventListener('transitionend', handleResetPointerEvent)
     }
   }, 600)
 }

@@ -113,5 +113,6 @@
   "searchHistory": "Search History",
   "pageNotFound": "Page Not Found",
   "viewTimes": "View Times",
-  "runningTime": "Running Time"
+  "runningTime": "Running Time",
+  "close": "Close"
 }

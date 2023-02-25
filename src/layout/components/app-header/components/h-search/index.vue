@@ -25,11 +25,19 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleCloseSearch)
+  keyword.value = ''
 })
+
+watch(
+  () => appStore.showSearch,
+  (newVal) => {
+    !newVal && resetSearch()
+  }
+)
 
 // 重置搜索结果
 const resetSearch = () => {
-  results.value = results.value = searchStore.results
+  results.value = searchStore.results
   keyword.value = ''
 }
 // 处理结果高亮
@@ -39,10 +47,10 @@ const keywordsHightLight = (
   type?: boolean
 ) => {
   const reg = new RegExp(keyword, 'ig')
-  const firstIndex = content.indexOf(keyword)
+  const firstIndex = content.toLowerCase().indexOf(keyword.toLowerCase())
   // 是否截取
   if (type && firstIndex >= 6) {
-    content = '...' + content.slice(firstIndex - 3, 50)
+    content = '...' + content.slice(firstIndex - 3, firstIndex + 150)
   }
   let res = content.replace(reg, (match: string) => {
     return `<span class="text-[var(--text-accent)] family-shuhei">${match}</span>`
@@ -70,7 +78,12 @@ const throttledInput = useThrottleFn(handleInput, 100)
 const handleClickResult = (result: TResult) => {
   router.push({ name: 'article-detail', params: { id: result.id } })
   if (searchStore.results.every((item) => item.id !== result.id)) {
+    // 不存在则添加到头部
     searchStore.results.unshift({ ...result, history: true })
+  } else {
+    // 存在则置顶
+    const rest = searchStore.results.filter((item) => item.id !== result.id)
+    searchStore.results = [result, ...rest]
   }
   appStore.showSearch = false
   resetSearch()
@@ -90,7 +103,7 @@ const handleRemoveHistory = (id: number) => {
       ref="searchRef"
       class="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.2)] z-50"
     >
-      <div class="card absolute top-20 left-1/2 -translate-x-1/2 w-[30%] p-5">
+      <div class="card max-w-[560px] mx-auto mt-24 p-5">
         <div class="relative">
           <Search
             class="absolute top-1/2 -translate-y-1/2 left-3"
@@ -104,13 +117,18 @@ const handleRemoveHistory = (id: number) => {
             @input="throttledInput"
           />
         </div>
-        <div v-if="results.length" class="my-5 px-2">
-          {{ keyword.trim() ? $t('matchedResults') : $t('searchHistory') }}
-        </div>
-        <ul
+        <div
           v-if="results.length"
-          class="flex flex-col items-center gap-5 p-2 max-h-[500px] rounded-md overflow-y-auto"
+          class="flex items-center justify-between my-4 px-2"
         >
+          <span class="leading-[36px]">
+            {{ keyword.trim() ? $t('matchedResults') : $t('searchHistory') }}
+          </span>
+          <h-button class="sc-800:hidden" @click="appStore.showSearch = false">
+            {{ $t('close') }}
+          </h-button>
+        </div>
+        <ul v-if="results.length" class="results">
           <li
             class="w-full"
             v-for="res in results"
@@ -145,5 +163,21 @@ const handleRemoveHistory = (id: number) => {
 }
 .search-input:focus {
   @apply outline-2 outline outline-[var(--text-accent)];
+}
+.results {
+  @apply flex flex-col items-center gap-5 p-2 max-h-[480px] rounded-md overflow-y-auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: #eee;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(
+      180deg,
+      var(--theme-bg-color-one),
+      var(--theme-bg-color-two)
+    );
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
+  }
 }
 </style>
