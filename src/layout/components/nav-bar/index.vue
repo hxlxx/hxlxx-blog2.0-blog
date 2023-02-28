@@ -42,7 +42,7 @@ const handleDisappear = () => {
       topEl.classList.remove('disappear')
       topEl.classList.add('appear')
       topEl.style.transition = 'opacity 200ms linear 500ms'
-      topEl.style.right = '-20px'
+      topEl.style.right = '-24px'
       topEl.style.opacity = '1'
       topEl.addEventListener('transitionend', handleResetPointerEvent)
     }
@@ -70,6 +70,7 @@ onMounted(() => {
   document.addEventListener('scroll', handleDisappear)
   document.addEventListener('scroll', handleGetPercent)
   window.addEventListener('resize', throttledResize)
+  handleResize()
 })
 onBeforeUnmount(() => {
   document.removeEventListener('scroll', handleDisappear)
@@ -169,7 +170,7 @@ const handleOpenSmallNav = () => {
     transform: translateX(56px);
   }
   100% {
-    transform: translateX(44px);
+    transform: translateX(48px);
   }
 }
 

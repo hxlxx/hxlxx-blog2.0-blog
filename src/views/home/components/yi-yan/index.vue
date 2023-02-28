@@ -33,7 +33,7 @@ const throttledFn = useThrottleFn(() => {
 <template>
   <div class="relative mb-[60px] bg-transparent text-primary z-10">
     <div class="paragraph family-shuhei transition-200">
-      <h1 class="break-all">{{ creator }}:</h1>
+      <h1 class="text-cutoff-1">{{ creator }}:</h1>
       <p>{{ hitokoto }}</p>
       <Refresh
         class="ml-5 cursor-pointer transition-all duration-300 ease-in-out hover:rotate-180"

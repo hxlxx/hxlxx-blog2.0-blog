@@ -68,16 +68,16 @@ const handleSubmit = async () => {
     <div class="flex gap-5">
       <div class="flex-1">
         <div
-          class="card p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          class="card p-5 sc-500:p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           <template v-if="linkList.length">
             <div
               v-for="link in linkList"
               :key="link.id"
-              class="flex items-center gap-5 p-5 bg-primary rounded-xl transition-200 hover:shadow-primary"
+              class="flex items-center gap-2 sc-500:gap-5 p-5 bg-primary rounded-xl transition-200 hover:shadow-primary"
             >
               <div
-                class="shrink-0 w-20 h-20 rounded-full overflow-hidden transition-300 hover:shadow-primary hover:rotate-[360deg]"
+                class="shrink-0 w-10 h-10 sc-500:w-20 sc-500:h-20 rounded-full overflow-hidden transition-300 hover:shadow-primary hover:rotate-[360deg]"
               >
                 <img
                   class="w-full h-full object-cover"
@@ -87,7 +87,7 @@ const handleSubmit = async () => {
               <div>
                 <a
                   :href="link.link_url"
-                  class="text-bright text-[20px]"
+                  class="text-bright text-[20px] text-cutoff-1"
                   target="_blank"
                 >
                   {{ link.link_name }}

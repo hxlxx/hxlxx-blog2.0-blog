@@ -227,7 +227,7 @@ const handleLoadMore = () => {
           </div>
         </div>
         <div ref="commentRef">
-          <h-card class="px-2 py-1 md:p-10">
+          <h-card class="px-2 pt-1 pb-5 md:p-10">
             <template #header>
               <h1 class="pb-2 text-[32px] text-bright">
                 {{ $t('title.comments') }}

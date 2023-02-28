@@ -27,11 +27,11 @@ let timer2 = setTimeout(() => {
 
 <template>
   <div
-    class="message-box bg-[var(--background-secondary)] shadow-primary"
     ref="messageBoxRef"
+    class="message-box text-xs sc-400:text-base bg-secondary shadow-primary"
   >
     <div :class="['message', props.type]">
-      <span class="content family-shuhei">{{ props.message }}</span>
+      <span class="family-shuhei text-cutoff-1">{{ props.message }}</span>
     </div>
   </div>
 </template>

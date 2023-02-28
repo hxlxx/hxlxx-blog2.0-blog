@@ -7,7 +7,9 @@ type Props = {
   comments: TComment[]
 }
 const props = defineProps<Props>()
-const emits = defineEmits(['onSubmit'])
+const emits = defineEmits<{
+  (event: 'onSubmit', value: string, pid?: number, reply_to?: string): void
+}>()
 
 const commentInputRef = ref<HTMLElement>()
 const activeId = ref<number>()
@@ -68,10 +70,10 @@ const handleSubmitComment = (
           <div
             class="flex flex-col sc-375:flex-row gap-2 sc-375:gap-0 sc-375:items-center sc-375:justify-between mb-5"
           >
-            <span class="text-bright break-all">
+            <span class="text-bright text-cutoff-1">
               {{ comment.user.username }}
             </span>
-            <span class="text-sm">
+            <span class="text-sm text-cutoff-1">
               {{ useDateFormat(comment.created_at, 'YYYY-M-D').value }}
             </span>
           </div>

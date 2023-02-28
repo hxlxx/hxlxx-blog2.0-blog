@@ -11,7 +11,9 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits<{
+  (event: 'update:modelValue', value: boolean): void
+}>()
 const userStore = useUser()
 const i18n = useI18n()
 

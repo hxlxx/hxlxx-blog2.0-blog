@@ -14,7 +14,7 @@ defineProps<Props>()
         <slot name="header" />
       </div>
       <span
-        class="absolute left-0 bottom-0 min-w-[60px] w-[5%] h-1 rounded-[2px] theme-gradient"
+        class="absolute left-0 bottom-0 min-w-[100px] w-[5%] h-1 rounded-[2px] theme-gradient"
         :style="{
           width: dividerWith,
           height: dividerHeight

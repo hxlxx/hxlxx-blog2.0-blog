@@ -6,7 +6,9 @@ type Props = {
   showActionBox?: boolean
 }
 defineProps<Props>()
-const emits = defineEmits(['onSubmit', 'onBlur'])
+const emits = defineEmits<{
+  (event: 'onSubmit', value: string): void
+}>()
 
 const commentEditorRef = ref<HTMLElement>()
 const emojiRef = ref<HTMLElement>()
@@ -17,7 +19,7 @@ const content = ref<string>('')
 const faceList = emoji.faceList
 const emojiList = emoji.emojiList[0]
 const tvList = emoji.emojiList[1]
-// const emojiEntries = Object.keys(emoji)
+const activeName = ref<string>('emoji')
 
 const handleClick = (e: Event) => {
   if (
@@ -71,35 +73,42 @@ const handleSubmitComment = () => {
       v-if="showActionBox ? showActionBox : actionBoxVisible"
       class="action-box flex items-center justify-end gap-5 mt-5"
     >
-      <div class="relative">
-        <h-button
-          class="flex items-center gap-1"
-          @click.stop="emojiBoxVisible = true"
-        >
-          <winking-face-with-open-eyes size="20px" :stroke-width="5" />
-          <b>{{ $t('button.emoji') }}</b>
-        </h-button>
+      <el-popover placement="right" :width="200" trigger="click">
+        <template #reference>
+          <h-button
+            class="flex items-center gap-1"
+            @click.stop="emojiBoxVisible = true"
+          >
+            <winking-face-with-open-eyes size="20px" :stroke-width="5" />
+            <b>{{ $t('button.emoji') }}</b>
+          </h-button>
+        </template>
         <!-- 表情选择框 -->
-        <div
-          v-show="emojiBoxVisible"
-          ref="emojiRef"
-          id="emoji"
-          class="emoji shadow-primary"
-          @click.stop
-        >
-          <span class="emoji-arrow bg-secondary shadow-primary"></span>
-          <div class="relative pt-3 rounded-xl bg-secondary">
-            <div class="flex justify-around mb-1">
-              <div class="cursor-pointer" @click="emojiOrTv = true">
-                <img :src="faceList[0]" />
-              </div>
-              <div class="cursor-pointer" @click="emojiOrTv = false">
-                <img :src="faceList[1]" />
-              </div>
-            </div>
+        <div @click.stop>
+          <el-tabs v-model="activeName" class="demo-tabs">
+            <el-tab-pane name="emoji">
+              <template #label>
+                <div
+                  class="cursor-pointer w-[20px] h-[20px]"
+                  @click="emojiOrTv = true"
+                >
+                  <img :src="faceList[0]" />
+                </div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane name="tv">
+              <template #label>
+                <div
+                  class="cursor-pointer w-[20px] h-[20px]"
+                  @click="emojiOrTv = false"
+                >
+                  <img :src="faceList[1]" />
+                </div>
+              </template>
+            </el-tab-pane>
             <ul class="emojis">
               <li
-                class="cursor-pointer"
+                class="cursor-pointer w-[20px] h-[20px]"
                 v-for="[emojiKey, emojiValue] in Object.entries(
                   emojiOrTv ? emojiList : tvList
                 )"
@@ -113,9 +122,9 @@ const handleSubmitComment = () => {
                 />
               </li>
             </ul>
-          </div>
+          </el-tabs>
         </div>
-      </div>
+      </el-popover>
       <h-button type="primary" @click.stop="handleSubmitComment">
         {{ $t('button.addComment') }}
       </h-button>
@@ -124,15 +133,6 @@ const handleSubmitComment = () => {
 </template>
 
 <style lang="postcss" scoped>
-.emoji {
-  @apply absolute top-[50px] -left-1/2 w-[180px] h-[216px] rounded-xl;
-  .emoji-arrow {
-    @apply inline-block w-3 h-3 absolute -top-1 left-1/2 -translate-x-1/2 rotate-45;
-  }
-  img {
-    @apply w-5 h-5;
-  }
-}
 .action-box {
   animation: appear 500ms linear;
 }
@@ -160,5 +160,8 @@ const handleSubmitComment = () => {
     box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
     border-radius: 100px;
   }
+}
+:deep(.el-tabs__nav) {
+  height: 30px;
 }
 </style>

@@ -6,7 +6,9 @@ type Props = {
   data: TResult
 }
 defineProps<Props>()
-const emits = defineEmits(['onClose'])
+const emits = defineEmits<{
+  (event: 'onClose', value: number): void
+}>()
 </script>
 
 <template>

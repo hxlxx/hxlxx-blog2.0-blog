@@ -10,7 +10,9 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'default',
   disabled: false
 })
-const emits = defineEmits(['click'])
+const emits = defineEmits<{
+  (event: 'click', e: Event): void
+}>()
 
 const handleClick = (e: MouseEvent) => {
   emits('click', e)

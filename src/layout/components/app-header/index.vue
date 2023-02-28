@@ -68,7 +68,7 @@ const handleOpenDialog = () => {
     <!-- 导航栏 -->
     <div ref="navHeaderRef" class="nav-header">
       <div
-        class="relative h-full flex flex-col justify-center items-center cursor-pointer"
+        class="relative h-full hidden sc-400:flex flex-col justify-center items-center cursor-pointer"
         @click="router.push('/')"
       >
         <span class="logo-text"> 昏晓流霞 </span>

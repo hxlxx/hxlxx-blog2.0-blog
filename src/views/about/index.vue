@@ -24,7 +24,7 @@ const initAbout = async () => {
   <div>
     <nav-breadcrumb />
     <div class="flex gap-5">
-      <div class="flex-1 card px-20 py-10">
+      <div class="flex-1 card px-10 py-5 sm:px-20 sm:py-10">
         <md-editor
           class="md-editor"
           v-model="content"

@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -19,10 +20,12 @@ export default defineConfig({
         enabled: false,
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
-      }
+      },
+      resolvers: [ElementPlusResolver()]
     }),
     Components({
-      dts: path.resolve(pathSrc, 'components.d.ts')
+      dts: path.resolve(pathSrc, 'components.d.ts'),
+      resolvers: [ElementPlusResolver()]
     })
   ],
   resolve: {

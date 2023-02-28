@@ -24,7 +24,7 @@ watch(
     <template #header>
       <div class="flex items-center gap-5 pb-5">
         <div
-          class="w-14 h-1w-14 rounded-full overflow-hidden transition-300 hover:rotate-[360deg] hover:shadow-primary"
+          class="shrink-0 w-14 h-1w-14 rounded-full overflow-hidden transition-300 hover:rotate-[360deg] hover:shadow-primary"
         >
           <img
             class="w-full h-full object-cover"
@@ -32,20 +32,22 @@ watch(
           />
         </div>
         <div
-          class="flex items-center gap-5 cursor-pointer family-shuhei"
+          class="flex flex-col sm:flex-row sm:items-center gap-5 cursor-pointer family-shuhei"
           @click="
             $router.push({ name: 'talk-comments', params: { id: data.id } })
           "
         >
-          <span class="text-accent text-[20px]">
+          <span class="text-accent text-[20px] text-cutoff-1">
             {{ data?.user?.username }}
           </span>
-          <span>
-            {{ useDateFormat(data.created_at, 'MMM, D, YYYY').value }}
-          </span>
-          <span class="flex items-center gap-2 text-[var(--color-gray)]">
-            <Comment :stroke-width="5" />
-            {{ data.comment_count }}
+          <span class="flex items-center gap-5">
+            <span class="text-cutoff-1">
+              {{ useDateFormat(data.created_at, 'MMM, D, YYYY').value }}
+            </span>
+            <span class="flex items-center gap-2 text-[var(--color-gray)]">
+              <Comment :stroke-width="5" />
+              {{ data.comment_count }}
+            </span>
           </span>
         </div>
       </div>

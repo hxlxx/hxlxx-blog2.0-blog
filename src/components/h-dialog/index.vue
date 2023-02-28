@@ -4,7 +4,9 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits<{
+  (event: 'update:modelValue', value: boolean): void
+}>()
 
 // 关闭登录框
 const handleCloseDialog = (e: Event) => {
