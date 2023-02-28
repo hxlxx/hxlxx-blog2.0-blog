@@ -105,7 +105,7 @@ const handleSubmit = async () => {
           </div>
         </div>
         <!-- 交换友链表单 -->
-        <h-card class="p-10 mt-10">
+        <h-card class="p-2 sc-500:p-10 mt-10">
           <template #header>
             <h1 class="py-2 text-bright text-[32px]">
               {{ $t('title.shareLink') }}

@@ -77,7 +77,7 @@ const initTocbot = () => {
   tocbot.init({
     tocSelector: '#tocbot',
     contentSelector: '.article',
-    headingSelector: 'h1, h2, h3',
+    headingSelector: 'h1, h2, h3, h4, h5',
     hasInnerContainers: false,
     // collapseDepth: 0,
     headingsOffset: -200, // toc-list 判断 active 的基准线，以 document 为参照
@@ -184,8 +184,8 @@ const handleLoadMore = () => {
       </div>
     </div>
     <div class="flex gap-10 mt-10">
-      <div class="flex-1">
-        <div class="article card p-10">
+      <div class="flex-1 w-full">
+        <div class="article card p-2 md:p-10">
           <md-editor
             class="md-editor"
             v-model="article!.content"
@@ -297,7 +297,7 @@ const handleLoadMore = () => {
     @apply relative text-[32px];
   }
   h2 {
-    @apply relative text-[30px];
+    @apply relative text-[30px] mt-6;
   }
   h3 {
     @apply relative text-[28px];
@@ -320,6 +320,9 @@ const handleLoadMore = () => {
     @apply absolute block -bottom-2 left-0 w-[98px] h-[6px] rounded-[2px];
     content: '';
     background: var(--theme-gradient);
+  }
+  .default-theme pre {
+    max-width: 1176px;
   }
 }
 .toc-list {

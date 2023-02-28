@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { WinkingFaceWithOpenEyes } from '@icon-park/vue-next'
 import { emoji } from '@/utils'
+import type { TabsPaneContext } from 'element-plus'
 
 type Props = {
   showActionBox?: boolean
@@ -41,7 +42,10 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClick)
 })
-
+// 切换表情列表
+const handleClickTab = (tab: TabsPaneContext) => {
+  emojiOrTv.value = tab.paneName === 'emoji'
+}
 // 选择表情
 const handleSelectEmoji = (emoji: string) => {
   content.value += emoji
@@ -85,23 +89,17 @@ const handleSubmitComment = () => {
         </template>
         <!-- 表情选择框 -->
         <div @click.stop>
-          <el-tabs v-model="activeName" class="demo-tabs">
+          <el-tabs v-model="activeName" @tab-click="handleClickTab">
             <el-tab-pane name="emoji">
               <template #label>
-                <div
-                  class="cursor-pointer w-[20px] h-[20px]"
-                  @click="emojiOrTv = true"
-                >
+                <div class="cursor-pointer w-[20px] h-[20px]">
                   <img :src="faceList[0]" />
                 </div>
               </template>
             </el-tab-pane>
             <el-tab-pane name="tv">
               <template #label>
-                <div
-                  class="cursor-pointer w-[20px] h-[20px]"
-                  @click="emojiOrTv = false"
-                >
+                <div class="cursor-pointer w-[20px] h-[20px]">
                   <img :src="faceList[1]" />
                 </div>
               </template>

@@ -64,7 +64,7 @@ const handleChangePage = (page: number) => {
           <span
             class="time absolute top-1/2 -translate-y-1/2 text-accent family-shuhei"
           >
-            <span class="hidden md:block">
+            <span>
               {{
                 useDateFormat(article.created_at, 'YYYY-MM-DD').value.replace(
                   '"',
@@ -107,13 +107,13 @@ const handleChangePage = (page: number) => {
     }
   }
   .time {
-    @apply hidden;
+    @apply left-[10%] -top-[5px];
   }
 }
 @media (min-width: 400px) and (max-width: 768px) {
   .archive {
     .content {
-      @apply absolute top-0 left-[30%];
+      @apply absolute top-0 left-[20%];
       .title {
         &::before {
           @apply absolute -bottom-[10px] left-0 block w-[100px] h-[6px] rounded-full;
@@ -123,21 +123,10 @@ const handleChangePage = (page: number) => {
       }
     }
     .line {
-      @apply absolute top-0 left-[70px] w-[6px] h-full bg-[var(--text-bright)];
+      @apply hidden;
     }
     .time {
-      @apply left-[73px] -translate-x-10;
-      &::before {
-        @apply absolute top-1/2 -right-[50px] -translate-y-1/2 block w-5 h-5 rounded-full;
-        content: '';
-        z-index: 10;
-        background-color: var(--text-accent);
-      }
-      &::after {
-        @apply absolute top-1/2 -right-[56px] -translate-y-1/2 block w-8 h-8 rounded-full;
-        content: '';
-        background-color: var(--background-secondary);
-      }
+      @apply left-[20%] -top-[5px];
     }
   }
 }

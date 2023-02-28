@@ -53,7 +53,7 @@ const router = useRouter()
             router.push({ name: 'article-detail', params: { id: article?.id } })
           "
         >
-          <span class="article-title text-bright transition-100">
+          <span class="article-title break-all text-bright transition-100">
             {{ article?.title }}
           </span>
         </h1>
