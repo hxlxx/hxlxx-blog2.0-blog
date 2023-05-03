@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { getTalkList } from '@/api'
-import { useSiteProfile } from '@/stores'
-import type { TQueryInfo, TTalk, TWebsiteProfile } from '@/types'
-
-const profileStore = useSiteProfile()
+import type { TQueryInfo, TTalk } from '@/types'
 
 const talkList = ref<TTalk[]>([])
 const query = reactive<TQueryInfo>({
@@ -13,11 +10,9 @@ const query = reactive<TQueryInfo>({
 })
 const total = ref<number>(0)
 const hasMore = computed(() => query.page! * query.limit! < total.value)
-const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 
 onBeforeMount(() => {
   initTalkList()
-  Object.assign(profile, profileStore.profile)
 })
 
 const initTalkList = async () => {
@@ -59,7 +54,7 @@ const handleLoadMore = () => {
         </div>
       </div>
       <div class="hidden lg:block w-[324px]">
-        <profile-card :profile="profile" />
+        <profile-card />
       </div>
     </div>
   </div>

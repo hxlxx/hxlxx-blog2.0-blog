@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { createLink, getLinkList } from '@/api'
 import hMessage from '@/components/h-message'
-import { useSiteProfile, useUser } from '@/stores'
-import type { TLink, TWebsiteProfile } from '@/types'
+import { useUser } from '@/stores'
+import type { TLink } from '@/types'
 import { useI18n } from 'vue-i18n'
 
 const i18n = useI18n()
 
-const profileStore = useSiteProfile()
 const userStore = useUser()
 
-const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 const linkList = ref<TLink[]>([])
 const formInitial = () => ({
   link_name: '',
@@ -23,7 +21,6 @@ const linkForm = reactive<TLink>(formInitial())
 
 onBeforeMount(() => {
   initLinkList()
-  Object.assign(profile, profileStore.profile)
 })
 
 const initLinkList = async () => {
@@ -181,7 +178,7 @@ const handleSubmit = async () => {
         </h-card>
       </div>
       <div class="hidden sc-1260:block w-[324px]">
-        <profile-card :profile="profile" />
+        <profile-card />
       </div>
     </div>
   </div>

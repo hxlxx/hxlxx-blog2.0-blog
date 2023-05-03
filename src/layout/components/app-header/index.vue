@@ -4,6 +4,7 @@ import { emptyObject } from '@/utils'
 import { Search, Sphere } from '@icon-park/vue-next'
 import { useI18n } from 'vue-i18n'
 import { navList } from './constant'
+import { useThrottleFn } from '@vueuse/core'
 import Login from './components/login/index.vue'
 import UserInfo from './components/user-info/index.vue'
 import SmallNav from './components/small-nav/index.vue'
@@ -41,12 +42,13 @@ const handleScroll = () => {
   }
 }
 
+const throttledScroll = useThrottleFn(handleScroll, 100)
 onMounted(() => {
   // 处理导航栏滚动
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', throttledScroll)
 })
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('scroll', throttledScroll)
 })
 
 // 切换语言

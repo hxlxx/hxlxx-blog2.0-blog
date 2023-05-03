@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import type { TWebsiteProfile } from '@/types'
 import { Github } from '@icon-park/vue-next'
+import { useSiteProfile } from '@/stores'
 
-type Props = {
-  profile: TWebsiteProfile
-}
+const profileStore = useSiteProfile()
 
-defineProps<Props>()
+const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
+
+watch(
+  () => profileStore.profile,
+  (newVal) => {
+    Object.assign(profile, newVal)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

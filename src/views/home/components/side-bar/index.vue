@@ -69,7 +69,7 @@ const initRecentlyComment = async () => {
 <template>
   <div class="hidden xl:flex flex-col gap-10">
     <!-- 网站信息 -->
-    <profile-card :profile="profile" />
+    <profile-card />
     <!-- 最新评论 -->
     <h-card>
       <template #header>

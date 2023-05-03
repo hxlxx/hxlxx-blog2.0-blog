@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { createComment, getArticleDetail, getCommentList } from '@/api'
-import { useSiteProfile, useUser } from '@/stores'
-import type { TArticle, TWebsiteProfile, TComment, TQueryInfo } from '@/types'
+import { useUser } from '@/stores'
+import type { TArticle, TComment, TQueryInfo } from '@/types'
 import { useDateFormat } from '@vueuse/core'
 import {
   RocketOne,
@@ -21,10 +21,8 @@ const route = useRoute()
 const router = useRouter()
 const i18n = useI18n()
 const userStore = useUser()
-const profileStore = useSiteProfile()
 
 const commentRef = ref<HTMLElement>()
-const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 const article = reactive<TArticle>({ content: '' } as TArticle)
 const showCatalog = ref<boolean>(true)
 const commentList = ref<TComment[]>([])
@@ -37,7 +35,6 @@ const total = ref<number>(0)
 const hasMore = computed(() => query.page! * query.limit! < total.value)
 
 onBeforeMount(() => {
-  Object.assign(profile, profileStore.profile)
   initArticleDetail(parseInt(route.params.id as string))
   initCommentList()
   initTocbot()
@@ -184,7 +181,7 @@ const handleLoadMore = () => {
       </div>
     </div>
     <div class="flex gap-10 mt-10">
-      <div class="flex-1 w-full">
+      <div class="flex-1 w-[calc(100%_-_364px)]">
         <div class="article card p-2 md:p-10">
           <md-editor
             class="md-editor"
@@ -249,7 +246,7 @@ const handleLoadMore = () => {
         </div>
       </div>
       <div class="hidden xl:flex flex-col gap-10 w-[324px] flex-shrink-0">
-        <profile-card :profile="profile" />
+        <profile-card />
         <div class="sticky top-[130px] left-0">
           <div v-if="showCatalog" class="card p-5 mb-10">
             <h1 class="mb-2 text-bright text-[20px]">

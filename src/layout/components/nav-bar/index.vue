@@ -65,16 +65,18 @@ const handleResize = () => {
     appStore.showSmallNav = false
   }
 }
+const throttledDisappear = useThrottleFn(handleDisappear, 100)
+const throttledGetPercent = useThrottleFn(handleGetPercent, 100)
 const throttledResize = useThrottleFn(handleResize, 100)
 onMounted(() => {
-  document.addEventListener('scroll', handleDisappear)
-  document.addEventListener('scroll', handleGetPercent)
+  document.addEventListener('scroll', throttledDisappear)
+  document.addEventListener('scroll', throttledGetPercent)
   window.addEventListener('resize', throttledResize)
   handleResize()
 })
 onBeforeUnmount(() => {
-  document.removeEventListener('scroll', handleDisappear)
-  document.removeEventListener('scroll', handleGetPercent)
+  document.removeEventListener('scroll', throttledDisappear)
+  document.removeEventListener('scroll', throttledGetPercent)
   window.removeEventListener('resize', throttledResize)
 })
 

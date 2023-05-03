@@ -77,7 +77,7 @@ const handleSubmitComment = () => {
       v-if="showActionBox ? showActionBox : actionBoxVisible"
       class="action-box flex items-center justify-end gap-5 mt-5"
     >
-      <el-popover placement="right" :width="200" trigger="click">
+      <el-popover placement="left" :width="200" trigger="click">
         <template #reference>
           <h-button
             class="flex items-center gap-1"

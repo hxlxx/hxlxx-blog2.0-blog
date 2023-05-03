@@ -1,4 +1,4 @@
-export * from './website-profile'
+export * from './site-profile'
 export * from './user'
 export * from './yiyan'
 export * from './app'

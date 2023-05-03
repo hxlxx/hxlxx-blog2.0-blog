@@ -6,6 +6,11 @@ export const emptyObject = (target: object) => {
   return keys.length === 0
 }
 
+/**
+ * @description: 将字符串中的emoji字符转换为对应图片
+ * @param {string} content
+ * @return {string} 解析后的字符串
+ */
 export const parseComment = (content: string) => {
   if (!content?.trim()) return ''
   const emojiReg = /\[(\S+?)\]/g

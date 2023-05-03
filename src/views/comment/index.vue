@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { getCommentList, createComment } from '@/api'
 import hMessage from '@/components/h-message'
-import { useSiteProfile, useUser } from '@/stores'
-import type { TComment, TQueryInfo, TWebsiteProfile } from '@/types'
+import { useUser } from '@/stores'
+import type { TComment, TQueryInfo } from '@/types'
 import { useI18n } from 'vue-i18n'
 
 const i18n = useI18n()
 const userStore = useUser()
-const profileStore = useSiteProfile()
 
 const commentList = ref<TComment[]>([])
 const query = reactive<TQueryInfo>({
@@ -17,11 +16,9 @@ const query = reactive<TQueryInfo>({
 })
 const total = ref<number>(0)
 const hasMore = computed(() => query.page! * query.limit! < total.value)
-const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 
 onBeforeMount(() => {
   initCommentList()
-  Object.assign(profile, profileStore.profile)
 })
 
 const initCommentList = async (flag?: boolean) => {
@@ -92,7 +89,7 @@ const handleLoadMore = () => {
         </h-card>
       </div>
       <div class="hidden lg:block w-[324px]">
-        <profile-card :profile="profile" />
+        <profile-card />
       </div>
     </div>
   </div>

@@ -48,7 +48,7 @@ const handleChangePage = (page: number) => {
         >
           <div class="content absolute top-10 w-[60%] lg:w-[40%]">
             <h1
-              class="title mt-[6px] mb-5 relative text-[32px] break-all family-shuhei cursor-pointer transition-200 hover:opacity-60"
+              class="title mt-[6px] mb-5 relative text-[32px] text-cutoff-1 family-shuhei cursor-pointer transition-200 hover:opacity-60"
               @click="
                 router.push({
                   name: 'article-detail',

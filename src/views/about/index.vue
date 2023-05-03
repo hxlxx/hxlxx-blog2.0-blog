@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { getAbout } from '@/api'
-import { useSiteProfile } from '@/stores'
-import type { TWebsiteProfile } from '@/types'
 import MdEditor from 'md-editor-v3'
 
-const profileStore = useSiteProfile()
-
 const content = ref<string>('# Hello World!!!')
-const profile = reactive<TWebsiteProfile>({} as TWebsiteProfile)
 
 onBeforeMount(() => {
   initAbout()
-  Object.assign(profile, profileStore.profile)
 })
 
 const initAbout = async () => {
@@ -36,7 +30,7 @@ const initAbout = async () => {
         />
       </div>
       <div class="hidden lg:block w-[324px]">
-        <profile-card :profile="profile" />
+        <profile-card />
       </div>
     </div>
   </div>
